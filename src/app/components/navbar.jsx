@@ -8,7 +8,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return(
-    <nav className="p-5 top-0 h-28 md:h-auto">
+    <nav className="p-5 top-0">
       <div className="flex justify-between items-center flex-wrap mx-auto">
         <div className="flex justify-between basis-full md:basis-auto">
           <a href="/" className="flex flex-row items-center space-x-3 ml-5 text-primary font-bold text-xl">
@@ -23,9 +23,9 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-        <div className={`${isOpen?'flex':'hidden'} ml-3 mt-4 basis-full justify-evenly md:flex md:flex-row md:basis-auto md:mt-auto`}>
-          <Link href="/records" className="mx-2 inline-flex flex-wrap items-center justify-center text-center cursor-pointer transition duration-200 ease-in-out font-semibold py-2 px-4 rounded-md bg-transparent hover:bg-primary-100 text-primary-600">Récords del club</Link>
-          <Link href="/login" className="mx-2 inline-flex flex-wrap items-center justify-center text-center cursor-pointer transition duration-200 ease-in-out font-semibold py-2 px-4 rounded-md bg-primary-600 hover:bg-primary-500 text-white">Iniciar sesión</Link>
+        <div className={`${isOpen?'flex':'hidden'} ml-3 mt-4 basis-full justify-evenly md:flex md:flex-row md:basis-auto md:mt-0`}>
+          <Link href="/records" className="mx-2 cursor-pointer transition duration-200 ease-in-out font-semibold py-2 px-4 rounded-md bg-transparent hover:bg-primary-100 text-primary-600">Récords del club</Link>
+          <Link href="/login" className="mx-2 cursor-pointer transition duration-200 ease-in-out font-semibold py-2 px-4 rounded-md bg-primary-600 hover:bg-primary-500 text-white">Iniciar sesión</Link>
         </div> 
       </div>
     </nav>
