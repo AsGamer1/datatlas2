@@ -1,8 +1,8 @@
 export async function GET(request) {
   const userAgent = request.headers.get('user-agent');
-  const isAndroid = /android/i.test(userAgent);
+  const isWindows = /Windows/i.test(userAgent);
 
-  const manifest = isAndroid ? {
+  const manifest = !isWindows ? {
     "name": "Atlas",
     "short_name": "Atlas",
     "description": "Aplicación de consulta de la base de datos del CA Atlas",
