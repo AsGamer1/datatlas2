@@ -8,7 +8,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return(
-    <nav className="p-5 top-0">
+    <nav className="p-5 top-0 bg-white">
       <div className="flex justify-between items-center flex-wrap mx-auto">
         <div className="flex justify-between basis-full md:basis-auto">
           <a href="/" className="flex flex-row items-center space-x-3 ml-5 text-primary font-bold text-xl">
