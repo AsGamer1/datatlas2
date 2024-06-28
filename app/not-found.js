@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
@@ -8,7 +9,9 @@ export default function NotFound() {
         <p className="text-lg m-2">No hemos encontrado la página</p>
       </div>
       <div className="m-2 cursor-pointer transition duration-200 ease-in-out font-semibold">
-        <Link href="/" className="py-2 px-4 rounded-md bg-primary-600 hover:bg-primary-500 text-white">Ir a inicio</Link>
+        <Button variant="default">
+          <Link href="/">Ir al inicio</Link>
+        </Button>
       </div>
     </main>
   )
