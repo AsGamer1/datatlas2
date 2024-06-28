@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <>
+    <main>
       <section className="py-10 bg-primary-100">
         <div className="w-full max-w-full lg:max-w-[calc(min(100vw-60px,1220px))] mx-auto px-5">
           <div className="flex flex-wrap flex-row -mx-5 items-center">
@@ -29,6 +29,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </main>
   );
 }

@@ -11,11 +11,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es">
+    <html>
       <head>
         <link rel="manifest" href="/api/manifest"/>
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} flex flex-col min-h-[100vh]`}>
         <Navbar/>
         {children}
       </body>

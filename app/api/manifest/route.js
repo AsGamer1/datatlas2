@@ -2,9 +2,10 @@ export async function GET(request) {
   const userAgent = request.headers.get('user-agent');
   const isWindows = /Windows/i.test(userAgent);
   const isAndroid = /Android/i.test(userAgent);
+  var manifest;
 
   if (isWindows) {
-    const manifest = {
+    manifest = {
       "name": "Atlas",
       "short_name": "Atlas",
       "description": "Aplicación de consulta de la base de datos del CA Atlas",
@@ -28,7 +29,7 @@ export async function GET(request) {
       "orientation": "portrait"
     }
   } else if (isAndroid) {
-    const manifest = {
+    manifest = {
       "name": "Atlas",
       "short_name": "Atlas",
       "description": "Aplicación de consulta de la base de datos del CA Atlas",
@@ -52,7 +53,7 @@ export async function GET(request) {
       "orientation": "portrait"
     }
   } else {
-    const manifest = {
+    manifest = {
       "name": "Atlas",
       "short_name": "Atlas",
       "description": "Aplicación de consulta de la base de datos del CA Atlas",
