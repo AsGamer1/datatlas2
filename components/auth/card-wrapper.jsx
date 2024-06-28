@@ -6,7 +6,7 @@ import { BackButton } from "@/components/auth/back-button";
 
 export function CardWrapper({children,headerHeader,headerLabel,backButtonLabel,backButtonRef}) {
   return(
-    <Card className="w-full max-w-[350px] shadow-md">
+    <Card className="w-full max-w-[380px] shadow-md">
       <CardHeader>
         <Header header={headerHeader} label={headerLabel}>
         </Header>

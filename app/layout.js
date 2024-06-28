@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="manifest" href="/api/manifest"/>
       </head>
-      <body className={`${inter.className} flex flex-col min-h-[100vh]`}>
+      <body className={`${inter.className} flex flex-col min-h-[100vh] bg-primary/10`}>
         <Navbar/>
         {children}
       </body>

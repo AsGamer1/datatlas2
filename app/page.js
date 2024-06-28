@@ -3,10 +3,10 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main>
-      <section className="py-10 bg-primary/5">
+      <section className="py-10">
         <div className="w-full max-w-full lg:max-w-[calc(min(100vw-60px,1220px))] mx-auto px-5">
           <div className="flex flex-wrap flex-row -mx-5 items-center">
-            <div className="relative w-full px-5 lg:w-6/12">
+            <div className="flex flex-col w-full px-5 items-center lg:w-6/12">
               <h1 className="text-[calc(1.475rem+2.7vw)] lg:text-[3.5rem] leading-[1.2] mb-6 font-semibold">La <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-tertiary capitalize">base de datos</span><br/> de tu club favorito</h1>
               <p className="text-[#374151] text-lg">Récords del club, tus marcas personales y las competiciones en las que has participado en un solo lugar.</p>
             </div>
