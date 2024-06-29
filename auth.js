@@ -3,9 +3,31 @@ import authConfig from "@/auth.config";
 
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/lib/db";
- 
-export const { handlers: { GET, POST }, signIn, signOut, auth } = NextAuth({
+
+import { getUserById } from "@/data/user";
+
+export const { handlers, signIn, signOut, auth } = NextAuth({
+  callbacks: {
+    async session({ token, session }) {
+      if (token.sub && session.user) {
+        session.user.id = token.sub
+        session.user.role = token.role
+        session.user.birthdate = token.birthdate
+      }
+      return session
+    },
+    async jwt({ token }) {
+      if (!token.sub) return token
+      const existingUser = await getUserById(token.sub)
+      if (!existingUser) return token
+      token.name = existingUser.nombre
+      token.picture = existingUser.foto
+      token.role = existingUser.tipo
+      token.birthdate = existingUser.nacimiento
+      return token
+    }
+  },
   adapter: PrismaAdapter(db),
-  session: {strategy: "jwt"},
+  session: { strategy: "jwt" },
   ...authConfig,
 })

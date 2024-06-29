@@ -34,6 +34,7 @@ model Usuario {
   password      String?
   nacimiento    DateTime
   foto          String?
+  tipo          TipoCuenta      @default(atleta)
   cuentas       Cuenta[]
   @@unique([nombre, nacimiento], name: "usuario")
 }
@@ -41,7 +42,6 @@ model Usuario {
 model Cuenta {
   id                String      @id @default(cuid())
   idUsuario         String
-  tipo              TipoCuenta
   provider          String
   providerAccountId String
   refresh_token     String?

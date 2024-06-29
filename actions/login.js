@@ -16,7 +16,7 @@ export async function login(values) {
   const { nombre, fecha } = validatedFields.data
 
   try {
-    await signIn("credentials", { nombre, fecha, redirectTo: DEFAULT_LOGIN_REDIRECT })
+    await signIn("credentials", { nombre: nombre, fecha: fecha, redirectTo: DEFAULT_LOGIN_REDIRECT })
   } catch (error) {
     if(error instanceof AuthError) {
       switch(error.type) {
