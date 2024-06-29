@@ -23,7 +23,7 @@ export async function login(values) {
         case "CredentialsSignin":
           return { error: "Los datos no coinciden" }
         default:
-          return { error }
+          return { error: "Ha habido un error" }
       }
     }
     throw error
