@@ -6,8 +6,8 @@
 
 // prisma/schema.prisma
 datasource db {
-  provider  = "postgresql"
-  url  	    = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
   // uncomment next line if you use Prisma <5.10
   // directUrl = env("DATABASE_URL_UNPOOLED")
 }
@@ -29,79 +29,64 @@ enum TipoCuenta {
 }
 
 model Usuario {
-  id            String          @id @default(cuid())
-  nombre        String
-  password      String?
-  nacimiento    DateTime
-  foto          String?
-  tipo          TipoCuenta      @default(atleta)
-  cuentas       Cuenta[]
+  id              String          @id @default(cuid())
+  nombre          String
+  password        String?
+  nacimiento      DateTime
+  foto            String?
+  tipo            TipoCuenta      @default(atleta)
+  participaciones Participacion[]
+
   @@unique([nombre, nacimiento], name: "usuario")
 }
 
-model Cuenta {
-  id                String      @id @default(cuid())
-  idUsuario         String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-  usuario           Usuario     @relation(fields: [idUsuario], references: [id])
-  participaciones   Participacion[]
-}
-
 model Sector {
-  id            String          @id @default(cuid())
-  nombre        String
-  esIndividual  Boolean
-  pruebas       Prueba[]
+  id           String   @id @default(cuid())
+  nombre       String
+  esIndividual Boolean
+  pruebas      Prueba[]
 }
 
 model Prueba {
-  id            String          @id @default(cuid())
+  id            String         @id @default(cuid())
   nombre        String
   idSector      String
   unidades      UnidadesMarcas
-  sector        Sector          @relation(fields: [idSector], references: [id])
+  sector        Sector         @relation(fields: [idSector], references: [id])
   competiciones Competicion[]
 }
 
 model Evento {
-  id            String          @id @default(cuid())
+  id            String        @id @default(cuid())
   nombre        String
   fecha         DateTime
   idLugar       String
-  lugar         Lugar           @relation(fields: [idLugar], references: [id])
+  lugar         Lugar         @relation(fields: [idLugar], references: [id])
   competiciones Competicion[]
 }
 
 model Lugar {
-  id            String          @id @default(cuid())
-  nombre        String
-  latitud       Float
-  longitud      Float
-  eventos       Evento[]
+  id       String   @id @default(cuid())
+  nombre   String
+  latitud  Float
+  longitud Float
+  eventos  Evento[]
 }
 
 model Competicion {
-  id            String        @id @default(cuid())
-  idEvento      String
-  idPrueba      String
-  evento        Evento        @relation(fields: [idEvento], references: [id])
-  prueba        Prueba        @relation(fields: [idPrueba], references: [id])
+  id              String          @id @default(cuid())
+  idEvento        String
+  idPrueba        String
+  evento          Evento          @relation(fields: [idEvento], references: [id])
+  prueba          Prueba          @relation(fields: [idPrueba], references: [id])
   participaciones Participacion[]
 }
 
 model Participacion {
-  id            String        @id @default(cuid())
-  idCuenta      String?
+  id            String      @id @default(cuid())
+  idUsuario     String?
   idCompeticion String
   marca         String
-  cuenta        Cuenta?       @relation(fields: [idCuenta], references: [id])
-  competicion   Competicion   @relation(fields: [idCompeticion], references: [id])
+  usuario       Usuario?    @relation(fields: [idUsuario], references: [id])
+  competicion   Competicion @relation(fields: [idCompeticion], references: [id])
 }
