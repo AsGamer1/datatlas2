@@ -1,14 +1,15 @@
 import  { AlertTriangleIcon } from "lucide-react";
+import { Alert, AlertTitle } from "@/components/ui/alert";
 
 export function FormError({message}) {
   if (!message) {
     return null
   } else {
     return (
-      <div className="bg-destructive/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-destructive">
-        <AlertTriangleIcon className="h-5 w-5" />
-        <p>{message}</p>
-      </div>
+      <Alert variant="destructive">
+        <AlertTriangleIcon className="h-4 w-4"/>
+        <AlertTitle>{message}</AlertTitle>
+      </Alert>
     )
   }
 }

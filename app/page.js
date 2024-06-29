@@ -8,7 +8,11 @@ export default function Home() {
           <div className="flex flex-wrap flex-row -mx-5 items-center">
             <div className="flex flex-col w-full px-5 items-center lg:w-6/12">
               <h1 className="text-[calc(1.475rem+2.7vw)] lg:text-[3.5rem] leading-[1.2] mb-6 font-semibold">La <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-tertiary capitalize">base de datos</span><br/> de tu club favorito</h1>
-              <p className="text-[#374151] text-lg">Récords del club, tus marcas personales y las competiciones en las que has participado en un solo lugar.</p>
+              <ul className="text-center text-[#374151] text-lg">
+                <li>Récords del club</li>
+                <li>Tus marcas personales</li>
+                <li>Historial de competiciones</li>
+              </ul>
             </div>
             <div className="relative w-full px-5 lg:w-6/12">
               <Image className="block mx-auto lg:mr-0 pr-6 lg:max-w-[500px]" src="/images/placeholder.png" style={{filter:"drop-shadow(0.5rem 0.5rem 0.25rem rgba(0, 0, 0, 0.075))"}} width="715" height="529"/>

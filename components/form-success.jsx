@@ -1,14 +1,15 @@
 import  { CheckCircleIcon } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export function FormSuccess({message}) {
   if (!message) {
     return null
   } else {
     return (
-      <div className="bg-emerald-500/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-emerald-500">
-        <CheckCircleIcon className="h-5 w-5" />
-        <p>{message}</p>
-      </div>
+      <Alert variant="success">
+        <CheckCircleIcon className="h-4 w-4"/>
+        <AlertTitle>{message}</AlertTitle>
+      </Alert>
     )
   }
 }
