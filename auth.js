@@ -7,6 +7,10 @@ import { db } from "@/lib/db";
 import { getUserById } from "@/data/user";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  pages: {
+    signIn: "/login",
+    error: "/auth-error"
+  },
   callbacks: {
     async session({ token, session }) {
       if (token.sub && session.user) {

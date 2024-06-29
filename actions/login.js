@@ -21,9 +21,9 @@ export async function login(values) {
     if(error instanceof AuthError) {
       switch(error.type) {
         case "CredentialsSignin":
-          return { error: "Los datos no coinciden" }
+          return { error: "No se encuentran coincidencias" }
         default:
-          return { error: "Ha habido un error" }
+          return { error: "No se encuentran coincidencias" }
       }
     }
     throw error
