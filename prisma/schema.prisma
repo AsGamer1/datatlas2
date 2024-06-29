@@ -35,6 +35,7 @@ model Usuario {
   nacimiento    DateTime
   foto          String?
   cuentas       Cuenta[]
+  @@unique([nombre, nacimiento], name: "usuario")
 }
 
 model Cuenta {

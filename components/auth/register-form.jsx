@@ -16,22 +16,23 @@ import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 
 // Schemas
-import { LoginSchema } from "@/schemas";
+import { RegisterSchema } from "@/schemas";
 
 // Server actions
-import { login } from "@/actions/login";
+import { register } from "@/actions/register";
 
-export function LoginForm() {
+export function RegisterForm() {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isPending, startTransition] = useTransition();
 
   const form = useForm({
-    resolver: zodResolver(LoginSchema),
+    resolver: zodResolver(RegisterSchema),
     defaultValues: {
       nombre: "",
       fecha: "",
+      password: "",
     }
   });
 
@@ -40,7 +41,7 @@ export function LoginForm() {
     setSuccess("")
 
     startTransition(()=>{
-      login(values)
+      register(values)
         .then((data)=>{
           setError(data.error)
           setSuccess(data.success)
@@ -50,10 +51,10 @@ export function LoginForm() {
 
   return (
     <CardWrapper
-      headerHeader="Portal de atletas"
-      headerLabel="Si eres atleta del club, ¡ya tienes cuenta!"
-      backButtonLabel="¿Aún no eres atleta?"
-      backButtonRef="/register"
+      headerHeader="Portal de entrenadores"
+      headerLabel="Registro temporal para entrenadores del club"
+      backButtonLabel="¿Eres atleta?"
+      backButtonRef="/login"
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(OnSubmit)} className="space-y-6 text-left">
@@ -76,10 +77,19 @@ export function LoginForm() {
                 <FormMessage/>
               </FormItem>
             )}/>
+            <FormField control={form.control} name="password" render={({field})=>(
+              <FormItem>
+                <FormLabel>Contraseña</FormLabel>
+                <FormControl>
+                  <Input {...field} disabled={isPending} type="password"/>
+                </FormControl>
+                <FormMessage/>
+              </FormItem>
+            )}/>
           </div>
           <FormError message={error}/>
           <FormSuccess message={success}/>
-          <Button disabled={isPending} type="submit" className="w-full">Iniciar sesión</Button>
+          <Button disabled={isPending} type="submit" className="w-full">Registrar cuenta</Button>
         </form>        
       </Form>
     </CardWrapper>
