@@ -31,8 +31,7 @@ enum TipoCuenta {
 model Usuario {
   id            String          @id @default(cuid())
   nombre        String
-  apellidos     String
-  password      String
+  password      String?
   nacimiento    DateTime
   foto          String?
   cuentas       Cuenta[]
