@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { UserButton } from "@/components/auth/user-button";
 
-export default function Navbar({session}) {
+export default function Navbar({ session }) {
 
   const pathname = usePathname();
 
@@ -25,7 +25,7 @@ export default function Navbar({session}) {
           </Button>
         </Link>
         {session ?
-          <UserButton />
+          <UserButton session={session} />
           :
           <Link href="/login">
             <Button variant={pathname == "/login" ? "default" : "ghost"} size="icon">
@@ -39,7 +39,7 @@ export default function Navbar({session}) {
           <Button variant="outline">Récords del club</Button>
         </Link>
         {session ?
-          <UserButton />
+          <UserButton session={session} />
           :
           <Link href="/login">
             <Button>Iniciar sesión</Button>

@@ -5,107 +5,48 @@ import { cn } from '@/lib/utils'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
 import { CalendarIcon } from 'lucide-react'
-import React from 'react'
+import { useState } from 'react'
 
-/**
- * @description Convert a date string from the french format without "/" to a valid date JJMMYYYY with missing values => new Date(YYYY-MM-DD)
- * @param dateString JJMMYYYY
- * @returns new Date(YYYY-MM-DD)
- */
-function frIsoRawDateToValidDate(dateString) {
-  const now = new Date()
-  const year = dateString.slice(4, 8)
-  const month = dateString.slice(2, 4)
-  const day = dateString.slice(0, 2)
-  const isValidYear = parseInt(year) <= now.getFullYear() && parseInt(year) > 1900
-  const isValidMonth = parseInt(month) <= 12 && parseInt(month) > 0
-  const isValidDay = parseInt(day) <= 31 && parseInt(day) > 0
-  const date = `${isValidYear ? year : now.getFullYear() - 18}-${
-    isValidMonth ? month : now.getMonth() + 1
-  }-${isValidDay ? day : now.getDate()}`
-  return new Date(date)
-}
+export default function DatePicker({ selectedDate, setFieldDate, setSelectedDate, ...props }) {
+  const [month, setMonth] = useState(0)
+  const [inputDate, setInputDate] = useState("")
+  const [isOpen, setIsOpen] = useState(false)
 
-const DatePicker = ({selectedDate, setSelectedDate, ...props }) => {
-  const [stringDate, setStringDate] = React.useState('')
-  const [isOpen, setIsOpen] = React.useState(false)
-  const handleKeyDown = (e) => {
-    const minDate = new Date(Date.now() - 1000 * 60 * 60 * 24 * 365 * 18)
-    if (e.key === 'Enter' && stringDate.length === 8) {
-      e.stopPropagation()
-      e.preventDefault()
-      return setIsOpen(false)
-    }
-    if (e.key === 'Delete') {
-      setStringDate('')
-      return setSelectedDate(minDate)
-    }
-    if (e.key === 'Backspace') {
-      return setStringDate((prev) => {
-        const sliced = prev.slice(0, -1)
-        setSelectedDate(frIsoRawDateToValidDate(sliced))
-        return prev.slice(0, -1)
-      })
-    }
-    if (e.key === 'Escape') {
-      return setIsOpen(false)
-    }
-    const isKeyDigit = parseInt(e.key) >= 0 && parseInt(e.key) <= 9
-    if (isKeyDigit) {
-      const toDigit = parseInt(e.key).toString()
-      setStringDate((prev) => {
-        if (prev.length === 8) {
-          setSelectedDate(minDate)
-          return ''
-        }
-        const newDate = `${prev}${toDigit}`
-        setSelectedDate(frIsoRawDateToValidDate(newDate))
-        return newDate
-      })
+  const handleDayPickerSelect = (date) => {
+    if (!date) {
+      setInputDate("")
+      setSelectedDate(undefined)
+      setFieldDate(undefined)
+    } else {
+      setSelectedDate(date)
+      setFieldDate(date)
+      setMonth(date)
+      setInputDate(format(date, "dd/MM/yyyy"))
+      setIsOpen(false)
     }
   }
+
   return (
-      <Popover onOpenChange={setIsOpen} open={isOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            {...props}
-            variant={'outline'}
-            type="button"
-            className={cn(
-              'w-full pl-3 text-left font-normal disabled:cursor-not-allowed disabled:opacity-50',
-              !selectedDate && 'text-muted-foreground',
-            )}
-          >
-            {selectedDate ? (
-              format(selectedDate, 'dd/MM/yyyy', { locale: es })
-            ) : (
-              <span/>
-            )}
-            <CalendarIcon className="ml-auto h-4 w-4 opacity-50 disabled:cursor-not-allowed disabled:opacity-50" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0 disabled:cursor-not-allowed disabled:opacity-50" align="start" onKeyDown={handleKeyDown}>
-          <Calendar
-            className="disabled:cursor-not-allowed disabled:opacity-50"
-            required
-            fromYear={new Date().getFullYear() - 100}
-            mode="single"
-            toDate={new Date(Date.now() - 1000 * 60 * 60 * 24 * 365 * 18)}
-            selected={selectedDate}
-            onSelect={(e) => {
-              setSelectedDate(e)
-              setStringDate('')
-            }}
-            captionLayout="dropdown"
-            disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
-            fixedWeeks
-            defaultMonth={selectedDate}
-            month={selectedDate}
-            onMonthChange={setSelectedDate}
-          />
-        </PopoverContent>
-      </Popover>
+    <Popover onOpenChange={setIsOpen} open={isOpen}>
+      <PopoverTrigger asChild>
+        <Button {...props} variant="outline" type="button" className={cn("w-full pl-3 text-left font-normal", !selectedDate && "text-muted-foreground hover:text-muted-foreground")}>
+          {selectedDate ? (inputDate) : (<span>Fecha de nacimiento</span>)}
+          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="start">
+        <Calendar
+          month={month}
+          onMonthChange={setMonth}
+          showOutsideDays
+          required
+          mode="single"
+          fixedWeeks
+          selected={selectedDate}
+          onSelect={handleDayPickerSelect}
+          disabled={(date) => date > new Date() || date < new Date(1900, 0, 1)}
+        />
+      </PopoverContent>
+    </Popover>
   )
 }
-
-export default DatePicker

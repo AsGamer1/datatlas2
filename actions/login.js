@@ -19,6 +19,7 @@ export async function login(values) {
   try {
     await signIn("credentials", { nombre: nombre, fecha: formatedFecha, redirectTo: DEFAULT_LOGIN_REDIRECT })
   } catch (error) {
+    console.log(validatedFields.data)
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":

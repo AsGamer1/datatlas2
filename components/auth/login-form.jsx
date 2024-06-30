@@ -27,6 +27,7 @@ export function LoginForm() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isPending, startTransition] = useTransition();
+  const [selectedDate,setSelectedDate] = useState(undefined)
 
   const form = useForm({
     resolver: zodResolver(LoginSchema),
@@ -71,7 +72,7 @@ export function LoginForm() {
               <FormItem>
                 <FormLabel>Fecha de nacimiento</FormLabel>
                 <FormControl>
-                  <DatePicker {...field} disabled={isPending} selectedDate={field.value} setSelectedDate={field.onChange}/>
+                  <DatePicker {...field} disabled={isPending} setFieldDate={field.onChange} selectedDate={selectedDate} setSelectedDate={setSelectedDate}/>
                 </FormControl>
                 <FormMessage/>
               </FormItem>

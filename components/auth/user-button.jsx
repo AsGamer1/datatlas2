@@ -6,12 +6,12 @@ import { logout } from "@/actions/logout";
 import { LogOutIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 
-export function UserButton() {
+export function UserButton({session}) {
 
   const user = useSession().data?.user
 
   return (
-    useSession().data &&
+    session.user ?
     <DropdownMenu>
       <DropdownMenuTrigger className="focus-visible:outline-none">
         <Avatar>
@@ -30,5 +30,7 @@ export function UserButton() {
         </span>
       </DropdownMenuContent>
     </DropdownMenu>
+    :
+    <div></div>
   )
 }

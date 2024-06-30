@@ -7,9 +7,7 @@ export default {
     Credentials({
       async authorize(credentials) {
         const validatedFields = LoginStringSchema.safeParse(credentials)
-
-        console.log(validatedFields.error)
-
+        
         if(validatedFields.success) {
           const { nombre, fecha } = validatedFields.data
           const usuario = await getUser(nombre, fecha)
