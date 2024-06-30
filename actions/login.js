@@ -19,12 +19,12 @@ export async function login(values) {
   try {
     await signIn("credentials", { nombre: nombre, fecha: formatedFecha, redirectTo: DEFAULT_LOGIN_REDIRECT })
   } catch (error) {
-    if(error instanceof AuthError) {
-      switch(error.type) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
         case "CredentialsSignin":
-          return { error: "No se encuentran coincidencias" }
+          return { error: "Datos incorrectos" }
         default:
-          return { error}
+          return { error: "Datos incorrectos" }
       }
     }
     throw error
