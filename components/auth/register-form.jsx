@@ -12,8 +12,8 @@ import { Button } from "@/components/ui/button";
 
 // Auth components
 import { CardWrapper } from "@/components/auth/card-wrapper";
-import { FormError } from "@/components/form-error";
-import { FormSuccess } from "@/components/form-success";
+import { FormError } from "@/components/custom/form-error";
+import { FormSuccess } from "@/components/custom/form-success";
 
 // Schemas
 import { RegisterSchema } from "@/schemas";

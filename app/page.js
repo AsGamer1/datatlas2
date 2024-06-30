@@ -1,38 +1,19 @@
-import Image from "next/image";
+import { History, Medal, Trophy } from "lucide-react";
+import { HomeCard } from "@/components/custom/home-card";
 
 export default function Home() {
   return (
-    <main>
-      <section className="py-10">
-        <div className="w-full max-w-full lg:max-w-[calc(min(100vw-60px,1220px))] mx-auto px-5">
-          <div className="flex flex-wrap flex-row -mx-5 items-center">
-            <div className="flex flex-col w-full px-5 items-center lg:w-6/12">
-              <h1 className="text-[calc(1.475rem+2.7vw)] lg:text-[3.5rem] leading-[1.2] mb-6 font-semibold">La <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-tertiary capitalize">base de datos</span><br/> de tu club favorito</h1>
-              <ul className="text-center text-[#374151] text-lg">
-                <li>Récords del club</li>
-                <li>Tus marcas personales</li>
-                <li>Historial de competiciones</li>
-              </ul>
-            </div>
-            <div className="relative w-full px-5 lg:w-6/12">
-              <Image className="block mx-auto lg:mr-0 pr-6 lg:max-w-[500px]" src="/images/placeholder.png" style={{filter:"drop-shadow(0.5rem 0.5rem 0.25rem rgba(0, 0, 0, 0.075))"}} width="715" height="529"/>
-            </div>
+    <main className="py-10 text-white bg-secondary-foreground flex flex-col flex-1 justify-center">
+      <div className="w-full max-w-full lg:max-w-[calc(min(100vw-60px,1220px))] mx-auto px-5">
+        <div className="flex flex-col w-full px-5 items-center">
+          <h1 className="text-center text-[calc(1.475rem+2.7vw)] lg:text-[3.5rem] leading-[1.2] mb-6 font-semibold">La <span className="bg-clip-text text-transparent bg-secondary capitalize">base</span><span className="bg-clip-text text-transparent bg-tertiary capitalize"> de </span><span className="bg-clip-text text-transparent bg-primary capitalize">datos</span><br /> de tu club favorito</h1>
+          <div className="flex flex-col lg:flex-row gap-4">
+            <HomeCard title="Marcas personales" Icon={Medal} contentTitle="Temporadas" content="desde 2023 hasta hoy" />
+            <HomeCard title="Récords del club" Icon={Trophy} contentTitle="Pruebas" content="todas las de pista" />
+            <HomeCard title="Historial de competiciones" Icon={History} contentTitle="Participaciones" content="pista, cross, trail, ruta" />
           </div>
         </div>
-      </section>
-      <section className="py-10 text-white bg-primary">
-        <div className="w-full max-w-full lg:max-w-[calc(min(100vw-60px,1220px))] mx-auto px-5">
-          <div className="flex flex-wrap flex-row -mx-5 items-center">
-            <div className="relative w-full px-5 lg:w-6/12">
-              <h1 className="text-[calc(1.475rem+2.7vw)] lg:text-[3.5rem] leading-[1.2] mb-6 font-semibold">¿Prefieres una App?</h1>
-              <p className="text-lg">Nuestra web se adapta a cualquier dispositivo, añádela a tu pantalla de inicio y úsala siempre que quieras.</p>
-            </div>
-            <div className="relative w-full lg:w-6/12 lg:pl-12 mx-auto">
-              <Image className="block mx-auto lg:ml-auto w-[60%] z-[10]" src="/images/placeholder2.png" width="580" height="611" style={{filter: "drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6))"}} />
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
     </main>
   );
 }
