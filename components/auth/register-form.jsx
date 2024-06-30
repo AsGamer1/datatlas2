@@ -20,6 +20,7 @@ import { RegisterSchema } from "@/schemas";
 
 // Server actions
 import { register } from "@/actions/register";
+import DatePicker from "@/components/custom/date-picker";
 
 export function RegisterForm() {
 
@@ -31,7 +32,6 @@ export function RegisterForm() {
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
       nombre: "",
-      fecha: "",
       password: "",
     }
   });
@@ -72,7 +72,7 @@ export function RegisterForm() {
               <FormItem>
                 <FormLabel>Fecha de nacimiento</FormLabel>
                 <FormControl>
-                  <Input {...field} disabled={isPending} type="date"/>
+                  <DatePicker selectedDate={field.value} setSelectedDate={field.onChange}/>
                 </FormControl>
                 <FormMessage/>
               </FormItem>

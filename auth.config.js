@@ -1,17 +1,18 @@
 import Credentials from "next-auth/providers/credentials"
 import { getUser } from "@/data/user";
-import { LoginSchema } from "@/schemas";
+import { LoginStringSchema } from "@/schemas";
 
 export default {
   providers: [
     Credentials({
       async authorize(credentials) {
-        const validatedFields = LoginSchema.safeParse(credentials)
+        const validatedFields = LoginStringSchema.safeParse(credentials)
+
+        console.log(validatedFields.error)
 
         if(validatedFields.success) {
           const { nombre, fecha } = validatedFields.data
-          const formatedFecha = (new Date(fecha)).toISOString()
-          const usuario = await getUser(nombre, formatedFecha)
+          const usuario = await getUser(nombre, fecha)
 
           if (!usuario) return null
 

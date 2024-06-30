@@ -20,6 +20,7 @@ import { LoginSchema } from "@/schemas";
 
 // Server actions
 import { login } from "@/actions/login";
+import DatePicker from "../custom/date-picker";
 
 export function LoginForm() {
 
@@ -31,7 +32,6 @@ export function LoginForm() {
     resolver: zodResolver(LoginSchema),
     defaultValues: {
       nombre: "",
-      fecha: "",
     }
   });
 
@@ -71,7 +71,7 @@ export function LoginForm() {
               <FormItem>
                 <FormLabel>Fecha de nacimiento</FormLabel>
                 <FormControl>
-                  <Input {...field} disabled={isPending} type="date"/>
+                  <DatePicker {...field} disabled={isPending} selectedDate={field.value} setSelectedDate={field.onChange}/>
                 </FormControl>
                 <FormMessage/>
               </FormItem>

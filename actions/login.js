@@ -14,16 +14,17 @@ export async function login(values) {
   }
 
   const { nombre, fecha } = validatedFields.data
+  const formatedFecha = fecha.toISOString()
 
   try {
-    await signIn("credentials", { nombre: nombre, fecha: fecha, redirectTo: DEFAULT_LOGIN_REDIRECT })
+    await signIn("credentials", { nombre: nombre, fecha: formatedFecha, redirectTo: DEFAULT_LOGIN_REDIRECT })
   } catch (error) {
     if(error instanceof AuthError) {
       switch(error.type) {
         case "CredentialsSignin":
           return { error: "No se encuentran coincidencias" }
         default:
-          return { error: "No se encuentran coincidencias" }
+          return { error}
       }
     }
     throw error
