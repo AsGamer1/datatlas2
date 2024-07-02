@@ -39,7 +39,7 @@
 		<td>►</td>
 		<td><a href="#uso">Uso</a></td>
 	</tr>
-  
+</table>
 📦 [Características](#-caracteristicas)
 - [📍 Overview](#-overview)
 - [📦 Features](#-features)
@@ -53,7 +53,7 @@
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 - [👏 Acknowledgments](#-acknowledgments)
-</details>
+</details>9+/*
 <hr>
 
 ## 📍 Overview
