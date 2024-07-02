@@ -22,25 +22,7 @@
 <img  src="https://img.shields.io/badge/Tailwind CSS-38BDF8.svg?style=default&logo=tailwindcss&logoColor=white"  alt="TailwindCSS">
 </p>
 <h2>Contenido</h2>
-<table>
-	<tr>
-		<td>📍</td>
-		<td><a href="#resumen">Resumen</a></td>
-	</tr>
-	<tr>
-		<td>📦</td>
-		<td><a href="#caracteristicas">Características</a></td>
-	</tr>
-	<tr>
-		<td>⚙️</td>
-		<td><a href="#instalacion">Instalación</a></td>
-	</tr>
-	<tr>
-		<td>►</td>
-		<td><a href="#uso">Uso</a></td>
-	</tr>
-</table>
-📦 [Características](#-caracteristicas)
+
 - [📍 Overview](#-overview)
 - [📦 Features](#-features)
 - [📂 Repository Structure](#-repository-structure)
@@ -53,8 +35,6 @@
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 - [👏 Acknowledgments](#-acknowledgments)
-</details>9+/*
-<hr>
 
 ## 📍 Overview
 
