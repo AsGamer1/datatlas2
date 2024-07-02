@@ -1,9 +1,5 @@
-
 <p align="center">
   <img src="public/icons/logo.png" width="100" alt="project-logo">
-</p>
-<p align="center">
-    <h1 align="center">ATLAS</h1>
 </p>
 <p align="center">
     <em>La base de datos de tu club favorito</em>
@@ -15,30 +11,46 @@
 	<img src="https://img.shields.io/github/languages/count/AsGamer1/Datatlas2?style=flat-square&&color=00aaaa" alt="repo-language-count">
 <p>
 <p align="center">
-		<em>Developed with the software and tools below.</em>
+		<em>Desarrollado con el software y las herramientas siguientes</em>
 </p>
-<p align="center">
-	<img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=flat-square&logo=JavaScript&logoColor=black" alt="JavaScript">
-	<img src="https://img.shields.io/badge/Nodemon-76D04B.svg?style=flat-square&logo=Nodemon&logoColor=white" alt="Nodemon">
-	<img src="https://img.shields.io/badge/React-61DAFB.svg?style=flat-square&logo=React&logoColor=black" alt="React">
-	<img src="https://img.shields.io/badge/OpenAI-412991.svg?style=flat-square&logo=OpenAI&logoColor=white" alt="OpenAI">
-	<img src="https://img.shields.io/badge/TypeScript-3178C6.svg?style=flat-square&logo=TypeScript&logoColor=white" alt="TypeScript">
-	<img src="https://img.shields.io/badge/Expo-000020.svg?style=flat-square&logo=Expo&logoColor=white" alt="Expo">
-	<img src="https://img.shields.io/badge/JSON-000000.svg?style=flat-square&logo=JSON&logoColor=white" alt="JSON">
-	<img src="https://img.shields.io/badge/Express-000000.svg?style=flat-square&logo=Express&logoColor=white" alt="Express">
+<p  align="center">
+<img  src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=default&logo=JavaScript&logoColor=black"  alt="JavaScript">
+<img  src="https://img.shields.io/badge/React-61DAFB.svg?style=default&logo=React&logoColor=black"  alt="React">
+<img  src="https://img.shields.io/badge/Prisma-2D3748.svg?style=default&logo=Prisma&logoColor=white"  alt="Prisma">
+<img  src="https://img.shields.io/badge/Next.js-000000.svg?style=default&logo=nextdotjs&logoColor=white"  alt="NextJS">
+<img  src="https://img.shields.io/badge/Zod-376DB9.svg?style=default&logo=zod&logoColor=white"  alt="Zod">
+<img  src="https://img.shields.io/badge/Tailwind CSS-38BDF8.svg?style=default&logo=tailwindcss&logoColor=white"  alt="TailwindCSS">
 </p>
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-
+<h2>Contenido</h2>
+<style type="text/css">
+	table {border: none;}
+</style>
+<table>
+	<tr>
+		<td>📍</td>
+		<td><a href="#resumen">Resumen</a></td>
+	</tr>
+	<tr>
+		<td>📦</td>
+		<td><a href="#caracteristicas">Características</a></td>
+	</tr>
+	<tr>
+		<td>⚙️</td>
+		<td><a href="#instalacion">Instalación</a></td>
+	</tr>
+	<tr>
+		<td>►</td>
+		<td><a href="#uso">Uso</a></td>
+	</tr>
+  
+📦 [Características](#-caracteristicas)
 - [📍 Overview](#-overview)
 - [📦 Features](#-features)
 - [📂 Repository Structure](#-repository-structure)
 - [🧩 Modules](#-modules)
 - [🚀 Getting Started](#-getting-started)
   - [⚙️ Install](#️-install)
-  - [► Using ChatGPT-App-React-Native-TypeScript](#-using-ChatGPT-App-React-Native-TypeScript)
+  - [► Using `ChatGPT-App-React-Native-TypeScript`](#-using-chatgpt-app-react-native-typescript)
   - [🧪 Tests](#-tests)
 - [🛠 Project Roadmap](#-project-roadmap)
 - [🤝 Contributing](#-contributing)
