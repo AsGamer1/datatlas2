@@ -22,9 +22,6 @@
 <img  src="https://img.shields.io/badge/Tailwind CSS-38BDF8.svg?style=default&logo=tailwindcss&logoColor=white"  alt="TailwindCSS">
 </p>
 <h2>Contenido</h2>
-<style type="text/css">
-	table {border: none;}
-</style>
 <table>
 	<tr>
 		<td>📍</td>
