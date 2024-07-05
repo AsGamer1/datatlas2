@@ -1,16 +1,11 @@
-"use client";
-
-import Link from "next/link";
-import LoginSVG from "@/app/svg/login";
-import RecordsSVG from "@/app/svg/records";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { UserButton } from "@/components/auth/user-button";
+import { auth } from "@/auth";
+import dynamic from "next/dynamic";
+const DynamicUserButton = dynamic(() => import("@/components/auth/user-button"), { ssr: false })
 
-export default function Navbar({ session }) {
+export default async function Navbar() {
 
-  const pathname = usePathname();
+  const session = await auth();
 
   return (
     <nav className="py-5 px-10 bg-[#173f3f] flex justify-between items-center shadow-sm">
@@ -19,32 +14,10 @@ export default function Navbar({ session }) {
         <span>CA Atlas</span>
       </a>
       <div className="flex items-center gap-x-2 md:hidden">
-        <Link href="/records">
-          <Button variant={pathname == "/records" ? "default" : "ghost"} size="icon">
-            <RecordsSVG className={`${pathname == "/records" ? "fill-white" : "fill-tertiary hover:fill-tertiary/80"} h-10 w-10 p-2`} />
-          </Button>
-        </Link>
-        {session ?
-          <UserButton session={session} />
-          :
-          <Link href="/login">
-            <Button variant={pathname == "/login" ? "default" : "ghost"} size="icon">
-              <LoginSVG className={`${pathname == "/login" ? "fill-white" : "fill-tertiary hover:fill-tertiary/80"} h-10 w-10 p-2`} />
-            </Button>
-          </Link>
-        }
+        <DynamicUserButton session={session} />
       </div>
       <div className="hidden gap-x-2 md:flex">
-        <Link href="/records">
-          <Button variant="outline">Récords del club</Button>
-        </Link>
-        {session ?
-          <UserButton session={session} />
-          :
-          <Link href="/login">
-            <Button>Iniciar sesión</Button>
-          </Link>
-        }
+        <DynamicUserButton session={session} />
       </div>
     </nav>
   )
