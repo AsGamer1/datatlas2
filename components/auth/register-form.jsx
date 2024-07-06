@@ -27,6 +27,7 @@ export function RegisterForm() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isPending, startTransition] = useTransition();
+  const [selectedDate, setSelectedDate] = useState(undefined)
 
   const form = useForm({
     resolver: zodResolver(RegisterSchema),
@@ -40,9 +41,9 @@ export function RegisterForm() {
     setError("")
     setSuccess("")
 
-    startTransition(()=>{
+    startTransition(() => {
       register(values)
-        .then((data)=>{
+        .then((data) => {
           setError(data.error)
           setSuccess(data.success)
         })
@@ -59,38 +60,38 @@ export function RegisterForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(OnSubmit)} className="space-y-6 text-left">
           <div className="space-y-4">
-            <FormField control={form.control} name="nombre" render={({field})=>(
+            <FormField control={form.control} name="nombre" render={({ field }) => (
               <FormItem>
                 <FormLabel>Nombre completo</FormLabel>
                 <FormControl>
-                  <Input {...field} disabled={isPending} type="text"/>
+                  <Input {...field} disabled={isPending} type="text" />
                 </FormControl>
-                <FormMessage/>
+                <FormMessage />
               </FormItem>
-            )}/>
-            <FormField control={form.control} name="fecha" render={({field})=>(
+            )} />
+            <FormField control={form.control} name="fecha" render={({ field }) => (
               <FormItem>
                 <FormLabel>Fecha de nacimiento</FormLabel>
                 <FormControl>
-                  <DatePicker selectedDate={field.value} setSelectedDate={field.onChange}/>
+                  <DatePicker {...field} disabled={isPending} setFieldDate={field.onChange} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
                 </FormControl>
-                <FormMessage/>
+                <FormMessage />
               </FormItem>
-            )}/>
-            <FormField control={form.control} name="password" render={({field})=>(
+            )} />
+            <FormField control={form.control} name="password" render={({ field }) => (
               <FormItem>
                 <FormLabel>Contraseña</FormLabel>
                 <FormControl>
-                  <Input {...field} disabled={isPending} type="password"/>
+                  <Input {...field} disabled={isPending} type="password" />
                 </FormControl>
-                <FormMessage/>
+                <FormMessage />
               </FormItem>
-            )}/>
+            )} />
           </div>
-          <FormError message={error}/>
-          <FormSuccess message={success}/>
+          <FormError message={error} />
+          <FormSuccess message={success} />
           <Button disabled={isPending} type="submit" className="w-full">Registrar cuenta</Button>
-        </form>        
+        </form>
       </Form>
     </CardWrapper>
   )

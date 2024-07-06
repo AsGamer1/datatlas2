@@ -14,7 +14,7 @@ export async function register(values) {
 
   const { nombre, fecha, password } = validatedFields.data
   const hashedPassword = await bcrypt.hash(password, 10)
-  const formatedFecha = (new Date(fecha)).toISOString()
+  const formatedFecha = fecha.toISOString()
   const existingUser = await getUser(nombre, formatedFecha)
 
   if (existingUser) return { error: "Ya existe este usuario" }
