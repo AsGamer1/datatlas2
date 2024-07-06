@@ -21,14 +21,11 @@ enum TipoCuenta {
 
 model Usuario {
   id              String          @id @default(cuid())
+  dni             String          @unique
   nombre          String
-  password        String?
   nacimiento      DateTime        @db.Date
   foto            String?
-  tipo            TipoCuenta      @default(atleta)
   participaciones Participacion[]
-
-  @@unique([nombre, nacimiento], name: "usuario")
 }
 
 model Sector {
