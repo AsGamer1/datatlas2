@@ -50,8 +50,8 @@ export function RegisterForm() {
 
   return (
     <CardWrapper
-      headerHeader="Portal de entrenadores"
-      headerLabel="Registro temporal para entrenadores del club"
+      headerHeader="Portal de atletas"
+      headerLabel="Registro temporal de atletas"
       backButtonLabel="¿Eres atleta?"
       backButtonRef="/login"
     >
