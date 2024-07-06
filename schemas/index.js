@@ -12,6 +12,6 @@ export const LoginStringSchema = z.object({
 
 export const RegisterSchema = z.object({
   nombre: z.string({ message: "" }).min(1, { message: "" }),
-  fecha: z.string({ message: "" }).date(""),
+  fecha: z.date(),
   password: z.string({ message: "" }).min(6, { message: "" })
 })
