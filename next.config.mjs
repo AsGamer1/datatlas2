@@ -12,6 +12,12 @@ const withPWA = withPWAInit({
   }
 });
 
-const nextConfig = {}
+const nextConfig = {
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['portal.atletismeatlas.es']
+    }
+  }
+}
 
 export default withPWA(nextConfig);
