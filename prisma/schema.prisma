@@ -23,7 +23,7 @@ model Usuario {
   id              String          @id @default(cuid())
   dni             String          @unique
   nombre          String
-  nacimiento      DateTime        @db.Date
+  nacimiento      DateTime?        @db.Date
   foto            String?
   participaciones Participacion[]
 }

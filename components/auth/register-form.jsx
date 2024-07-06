@@ -16,24 +16,22 @@ import { FormError } from "@/components/custom/form-error";
 import { FormSuccess } from "@/components/custom/form-success";
 
 // Schemas
-import { RegisterSchema } from "@/schemas";
+import { RegisterUserSchema } from "@/schemas";
 
 // Server actions
 import { register } from "@/actions/register";
-import DatePicker from "@/components/custom/date-picker";
 
 export function RegisterForm() {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isPending, startTransition] = useTransition();
-  const [selectedDate, setSelectedDate] = useState(undefined)
 
   const form = useForm({
-    resolver: zodResolver(RegisterSchema),
+    resolver: zodResolver(RegisterUserSchema),
     defaultValues: {
       nombre: "",
-      password: "",
+      dni: "",
     }
   });
 
@@ -69,20 +67,11 @@ export function RegisterForm() {
                 <FormMessage />
               </FormItem>
             )} />
-            <FormField control={form.control} name="fecha" render={({ field }) => (
+            <FormField control={form.control} name="dni" render={({ field }) => (
               <FormItem>
-                <FormLabel>Fecha de nacimiento</FormLabel>
+                <FormLabel>DNI</FormLabel>
                 <FormControl>
-                  <DatePicker {...field} disabled={isPending} setFieldDate={field.onChange} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )} />
-            <FormField control={form.control} name="password" render={({ field }) => (
-              <FormItem>
-                <FormLabel>Contraseña</FormLabel>
-                <FormControl>
-                  <Input {...field} disabled={isPending} type="password" />
+                  <Input {...field} disabled={isPending} type="text" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

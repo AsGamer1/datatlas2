@@ -9,7 +9,8 @@ import { getUserById } from "@/data/user";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
     signIn: "/login",
-    error: "/auth-error"
+    error: "/auth-error",
+    signOut: "/logout"
   },
   callbacks: {
     async session({ token, session }) {
