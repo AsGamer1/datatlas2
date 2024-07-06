@@ -17,7 +17,7 @@ export async function login(values) {
   const formatedFecha = fecha.toISOString()
 
   try {
-    await signIn("credentials", { nombre: nombre, fecha: formatedFecha, redirectTo: DEFAULT_LOGIN_REDIRECT })
+    await signIn("credentials", { nombre: nombre, nacimiento: formatedFecha, redirectTo: DEFAULT_LOGIN_REDIRECT })
   } catch (error) {
     console.log(validatedFields.data)
     if (error instanceof AuthError) {
@@ -25,7 +25,7 @@ export async function login(values) {
         case "CredentialsSignin":
           return { error: "Datos incorrectos" }
         default:
-          return { error: "Datos incorrectos" }
+          return { error: error }
       }
     }
     throw error
