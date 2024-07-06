@@ -2,7 +2,7 @@
   <img src="public/icons/logo.png" width="100" alt="project-logo">
 </p>
 <p align="center">
-    <em>La base de datos de tu club favorito</em>
+    <em>La base de datos de tu club favoritoo</em>
 </p>
 <p align="center">
 	<img src="https://img.shields.io/github/license/AsGamer1/Datatlas2?style=flatsquare&logo=opensourceinitiative&logoColor=white&color=%2300aaaa" alt="license">
