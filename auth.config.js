@@ -11,7 +11,6 @@ export default {
         if(validatedFields.success) {
           const { dni } = validatedFields.data
           const usuario = await getUser(dni)
-          console.log(usuario)
           if (!usuario) return null
 
           return usuario

@@ -2,11 +2,8 @@ import { db } from "@/lib/db"
 
 export async function getUser(dni) {
   try {
-    const test = await db.$queryRaw`SELECT ${dni} FROM usuario`
-
-    const user = await db.usuario.findFirst({ where: { dni } })
-    console.log(user)
-    return null
+    const user = await db.usuario.findUnique({ where: { dni } })
+    return user
   } catch {
     return null
   }

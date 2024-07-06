@@ -17,9 +17,6 @@ const nextConfig = {
     serverActions: {
       allowedOrigins: ['portal.atletismeatlas.es']
     }
-  },
-  compiler: {
-    removeConsole: false
   }
 }
 
