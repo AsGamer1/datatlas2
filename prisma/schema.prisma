@@ -14,7 +14,6 @@ enum UnidadesMarcas {
 }
 
 enum TipoCuenta {
-  administrador
   entrenador
   atleta
 }
@@ -23,8 +22,9 @@ model Usuario {
   id              String          @id @default(cuid())
   dni             String          @unique
   nombre          String
-  nacimiento      DateTime?        @db.Date
-  foto            String?
+  rol             TipoCuenta      @default(atleta)
+  nacimiento      DateTime?       @db.Date
+  password        String?
   participaciones Participacion[]
 }
 

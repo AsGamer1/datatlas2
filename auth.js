@@ -16,7 +16,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = token.sub
-        session.user.role = token.role
         session.user.birthdate = token.birthdate
       }
       return session
@@ -26,8 +25,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       const existingUser = await getUserById(token.sub)
       if (!existingUser) return token
       token.name = existingUser.nombre
-      token.picture = existingUser.foto
-      token.role = existingUser.tipo
       token.birthdate = existingUser.nacimiento
       return token
     }
