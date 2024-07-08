@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { auth } from "@/auth";
 
-export default function NotFound() {
+export default async function NotFound() {
+
+  const session = await auth()
+
   return (
     <main className="text-white text-center flex flex-col justify-center flex-1">
       <div className="w-full px-5">
@@ -10,7 +14,7 @@ export default function NotFound() {
       </div>
       <div className="m-2 cursor-pointer transition duration-200 ease-in-out font-semibold">
         <Button variant="default">
-          <Link href="/">Ir al inicio</Link>
+          <Link href={session ? "/inicio" : "/"}>Ir al inicio</Link>
         </Button>
       </div>
     </main>
