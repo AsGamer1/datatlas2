@@ -10,7 +10,7 @@ export default async function Navbar() {
   return (
     <nav className="py-4 px-4 sm:px-10 bg-[#173f3f] h-20 flex justify-between items-center shadow-sm">
       <a href={session ? "/inicio" : "/"} className="flex items-center space-x-3 text-tertiary font-bold text-xl">
-        <Image width="88" height="88" className="flex flex-row items-center w-max" src="/icons/logo_letras.png" alt="Club Atletisme Atlas"/>
+        <Image width="88" height="88" className="flex flex-row items-center text-center leading-5" src="/icons/logo_letras.png" alt="Club Atletisme Atlas"/>
       </a>
       <div className="flex items-center gap-x-2 md:hidden">
         <DynamicUserButton session={session} />
