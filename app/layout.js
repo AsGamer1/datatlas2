@@ -21,6 +21,8 @@ export default async function RootLayout({ children }) {
       <html>
         <head>
           <link rel="manifest" href="/api/manifest" />
+          <meta name="theme-color" content="#173f3f"/>
+          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
         </head>
         <body className={`${inter.className} flex flex-col min-h-[100vh] bg-secondary-foreground`}>
           <Navbar />
