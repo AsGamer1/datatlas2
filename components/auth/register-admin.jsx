@@ -16,10 +16,10 @@ import { FormError } from "@/components/custom/form-error";
 import { FormSuccess } from "@/components/custom/form-success";
 
 // Schemas
-import { RegisterUserSchema } from "@/schemas";
+import { RegisterAdminSchema } from "@/schemas";
 
 // Server actions
-import { register } from "@/actions/register";
+import { register } from "@/actions/register-admin";
 
 import DatePicker from "@/components/custom/date-picker";
 
@@ -31,10 +31,11 @@ export function RegisterForm() {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm({
-    resolver: zodResolver(RegisterUserSchema),
+    resolver: zodResolver(RegisterAdminSchema),
     defaultValues: {
       nombre: "",
       dni: "",
+      password: "",
     }
   });
 
@@ -53,8 +54,8 @@ export function RegisterForm() {
 
   return (
     <CardWrapper
-      headerHeader="Portal de atletas"
-      headerLabel="Registro temporal de atletas"
+      headerHeader="Portal de entrenadores"
+      headerLabel="Registro temporal de entrenadores"
       backButtonLabel="¿Eres atleta?"
       backButtonRef="/login"
     >
@@ -84,6 +85,15 @@ export function RegisterForm() {
                 <FormLabel>Fecha de nacimiento</FormLabel>
                 <FormControl>
                   <DatePicker {...field} disabled={isPending} selectedDate={selectedDate} setFieldDate={field.onChange} setSelectedDate={setSelectedDate} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )} />
+            <FormField control={form.control} name="password" render={({ field }) => (
+              <FormItem>
+                <FormLabel>Contraseña</FormLabel>
+                <FormControl>
+                  <Input {...field} disabled={isPending} type="password" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
