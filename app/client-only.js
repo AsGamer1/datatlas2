@@ -1,4 +1,4 @@
-"use client";  // Esto asegura que el código se ejecuta en el lado del cliente
+"use client";
 
 import { useEffect } from 'react';
 
@@ -14,16 +14,28 @@ export default function ClientOnly() {
       e.preventDefault();
     };
 
+    // Prevent double-tap to zoom
+    let lastTouchEnd = 0;
+    const preventDoubleTapZoom = (e) => {
+      const now = new Date().getTime();
+      if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+      }
+      lastTouchEnd = now;
+    };
+
     document.addEventListener('touchmove', preventZoom, { passive: false });
     document.addEventListener('gesturestart', preventGestureZoom);
     document.addEventListener('gesturechange', preventGestureZoom);
     document.addEventListener('gestureend', preventGestureZoom);
+    document.addEventListener('touchend', preventDoubleTapZoom, { passive: false });
 
     return () => {
       document.removeEventListener('touchmove', preventZoom);
       document.removeEventListener('gesturestart', preventGestureZoom);
       document.removeEventListener('gesturechange', preventGestureZoom);
       document.removeEventListener('gestureend', preventGestureZoom);
+      document.removeEventListener('touchend', preventDoubleTapZoom);
     };
   }, []);
 
