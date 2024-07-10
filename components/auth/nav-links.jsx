@@ -1,18 +1,21 @@
 "use client";
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "../ui/alert-dialog";
 import { logout } from "@/actions/logout";
-import { Home, LogOutIcon, Medal, Menu, Trophy } from "lucide-react";
+import { LogOutIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import RecordsSVG from "@/app/svg/records";
 import LoginSVG from "@/app/svg/login";
+import { useState } from "react";
 
 export default function UserButton({ session }) {
 
   const pathname = usePathname();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   if (session?.user) {
     return (
@@ -26,33 +29,24 @@ export default function UserButton({ session }) {
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <Link href="/inicio" className="sm:hidden">
-              <DropdownMenuItem>
-                <Home className="w-4 h-4 mr-2" />
-                Inicio
-              </DropdownMenuItem>
-            </Link>
-            <Link href="/records" className="sm:hidden">
-              <DropdownMenuItem>
-                <Trophy className="w-4 h-4 mr-2" />
-                Récords
-              </DropdownMenuItem>
-            </Link>
-            <Link href="/marcas-personales" className="sm:hidden">
-              <DropdownMenuItem>
-                <Medal className="w-4 h-4 mr-2" />
-                Marcas Personales
-              </DropdownMenuItem>
-            </Link>
-            <hr className="sm:hidden" />
-            <span onClick={() => { logout() }}>
-              <DropdownMenuItem>
-                <LogOutIcon className="w-4 h-4 mr-2" />
-                Cerrar sesión
-              </DropdownMenuItem>
-            </span>
+            <DropdownMenuItem onClick={() => { setIsDialogOpen(true) }}>
+              <LogOutIcon className="w-4 h-4 mr-2" />
+              Cerrar sesión
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        <AlertDialog open={isDialogOpen}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>¿Quieres cerrar sesión?</AlertDialogTitle>
+              <AlertDialogDescription>Esto hará que tengas que iniciar sesión de nuevo para poder ver tus marcas y estadísticas.</AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel onClick={() => { setIsDialogOpen(false) }}>Cancelar</AlertDialogCancel>
+              <AlertDialogAction onClick={() => { logout() }}>Continuar</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     )
   } else {

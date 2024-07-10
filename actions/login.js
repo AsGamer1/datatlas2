@@ -16,7 +16,7 @@ export async function login(values) {
 
   const { dni } = validatedFields.data
 
-  const rol = (await getUser(dni)).rol
+  const rol = (await getUser(dni))?.rol
 
   if (rol === "entrenador") {
     return {

@@ -17,6 +17,9 @@ export default {
       },
     },
     extend: {
+      screens: {
+        'xs': {'raw': '(max-height: 680px)'}
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

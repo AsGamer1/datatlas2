@@ -4,6 +4,7 @@ import { auth } from "@/auth";
 import "./globals.css";
 import Navbar from "@/app/_components/navbar";
 import Sidebar from "@/app/_components/sidebar";
+import BottomMenu from "@/app/_components/bottom-menu";
 
 const inter = Poppins({ subsets: ["latin"], weight: ["600"] });
 
@@ -20,16 +21,18 @@ export default async function RootLayout({ children }) {
     <SessionProvider session={session}>
       <html>
         <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="manifest" href="/api/manifest" />
-          <meta name="theme-color" content="#173f3f"/>
-          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+          <meta name="theme-color" content="#173f3f" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         </head>
-        <body className={`${inter.className} flex flex-col min-h-[100vh] bg-secondary-foreground`}>
-          <Navbar />
-          <div className="flex flex-row flex-1">
+        <body className={`${inter.className} grid grid-rows-10 xs:flex xs:flex-col sm:flex sm:flex-col h-screen bg-secondary-foreground`}>
+          <Navbar/>
+          <div className="flex flex-row row-span-8 flex-1">
             {session && <Sidebar />}
             {children}
           </div>
+          {session && <BottomMenu />}
         </body>
       </html>
     </SessionProvider>
