@@ -5,13 +5,10 @@ import "./globals.css";
 import Navbar from "@/app/_components/navbar";
 import Sidebar from "@/app/_components/sidebar";
 import BottomMenu from "@/app/_components/bottom-menu";
+import Head from "@/app/head";
+import ClientOnly from "@/app/client-only";
 
 const inter = Poppins({ subsets: ["latin"], weight: ["600"] });
-
-export const metadata = {
-  title: "Atlas",
-  description: "Base de datos de atletas del CA Atlas"
-};
 
 export default async function RootLayout({ children }) {
 
@@ -20,19 +17,15 @@ export default async function RootLayout({ children }) {
   return (
     <SessionProvider session={session}>
       <html>
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-          <link rel="manifest" href="/api/manifest" />
-          <meta name="theme-color" content="#173f3f" />
-          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        </head>
+        <Head />
         <body className={`${inter.className} grid grid-rows-10 xs:flex xs:flex-col sm:flex sm:flex-col h-screen bg-secondary-foreground`}>
-          <Navbar/>
+          <Navbar />
           <div className="flex flex-row row-span-8 flex-1">
             {session && <Sidebar />}
             {children}
           </div>
           {session && <BottomMenu />}
+          <ClientOnly />
         </body>
       </html>
     </SessionProvider>
