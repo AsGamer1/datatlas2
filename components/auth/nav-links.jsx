@@ -43,7 +43,7 @@ export default function UserButton({ session }) {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel onClick={() => { setIsDialogOpen(false) }}>Cancelar</AlertDialogCancel>
-              <AlertDialogAction onClick={() => { logout() }}>Continuar</AlertDialogAction>
+              <AlertDialogAction onClick={() => { logout();setIsDialogOpen(false) }}>Continuar</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
