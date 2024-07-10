@@ -13,7 +13,7 @@ export default function Sidebar() {
 
   return (
     <aside className="hidden sm:flex min-w-14 flex-col border-b bg-background">
-      <nav className="flex flex-col items-center gap-4 px-2 py-2">
+      <nav className="flex flex-col items-center gap-4 p-2">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -28,23 +28,26 @@ export default function Sidebar() {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link href="/records" className={pathname == "/records" ? active : inactive}>
-                <Trophy className="h-5 w-5" />
-                <span className="sr-only">Récords del club</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Récords</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
               <Link href="/marcas-personales" className={pathname == "/marcas-personales" ? active : inactive}>
                 <Medal className="h-5 w-5" />
                 <span className="sr-only">Marcas personales</span>
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right">Marcas personales</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </nav>
+      <hr/>
+      <nav className="flex flex-col items-center gap-4 p-2">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href="/records" className={pathname == "/records" ? active : inactive}>
+                <Trophy className="h-5 w-5" />
+                <span className="sr-only">Récords del club</span>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="right">Récords</TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </nav>
