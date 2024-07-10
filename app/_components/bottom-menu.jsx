@@ -1,6 +1,5 @@
 "use client";
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import Link from "next/link"
 import { Home, Medal, Trophy } from "lucide-react"
 import { usePathname } from "next/navigation";
@@ -17,28 +16,14 @@ export default function BottomMenu() {
         <Home className="h-7 w-7" />
         <span className="sr-only">Inicio</span>
       </Link>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Link href="/marcas-personales" className={pathname == "/marcas-personales" ? active : inactive}>
-              <Medal className="h-7 w-7" />
-              <span className="sr-only">Marcas personales</span>
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent side="right">Marcas personales</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Link href="/records" className={pathname == "/records" ? active : inactive}>
-              <Trophy className="h-7 w-7" />
-              <span className="sr-only">Récords del club</span>
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent side="right">Récords</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <Link href="/marcas-personales" className={pathname == "/marcas-personales" ? active : inactive}>
+        <Medal className="h-7 w-7" />
+        <span className="sr-only">Marcas personales</span>
+      </Link>
+      <Link href="/records" className={pathname == "/records" ? active : inactive}>
+        <Trophy className="h-7 w-7" />
+        <span className="sr-only">Récords del club</span>
+      </Link>
     </nav >
   )
 }
