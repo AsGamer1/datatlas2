@@ -7,7 +7,7 @@ import Sidebar from "@/app/_components/sidebar";
 import BottomMenu from "@/app/_components/bottom-menu";
 import Head from "@/app/head";
 import ClientOnly from "@/app/client-only";
-import { Container, ThemeProvider, Toolbar } from "@mui/material";
+import { Box, Container, Grid, Stack, ThemeProvider, Toolbar } from "@mui/material";
 import { atlasTheme } from "./theme";
 
 const inter = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
@@ -22,15 +22,12 @@ export default async function RootLayout({ children }) {
         <Head />
         <body className={inter.className}>
           <ThemeProvider theme={atlasTheme}>
-            <Container maxWidth="none" sx={{ height: "100dvh", width: "100%", display: "flex", flexDirection: "column", padding: 0 }}>
+            <Stack sx={{minHeight: "100dvh"}}>
               <Navbar session={session} />
-              {session && <Sidebar />}
-              <Container maxWidth="none" sx={{ flex: "1 1 0%", display: "flex", justifyContent: "center" }}>
-                <Toolbar sx={{ display: { xs: "none", sm: "inherit" } }} />
+              <Box sx={{flex: "1 1 0%"}}>
                 {children}
-              </Container>
-              {session && <BottomMenu />}
-            </Container>
+              </Box>
+            </Stack>
           </ThemeProvider>
           <ClientOnly />
         </body>

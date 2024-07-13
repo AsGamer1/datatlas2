@@ -9,8 +9,7 @@ export const atlasTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#0be0e0',
-      contrastText: '#ffffff'
+      main: '#0be0e0'
     },
     secondary: {
       main: '#173F3F',
