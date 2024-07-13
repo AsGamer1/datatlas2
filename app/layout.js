@@ -22,7 +22,7 @@ export default async function RootLayout({ children }) {
         <Head />
         <body className={inter.className}>
           <ThemeProvider theme={atlasTheme}>
-            <Stack sx={{minHeight: "100dvh"}}>
+            <Stack sx={{minHeight: "100dvh", bgcolor: "#18181B"}}>
               <Navbar session={session} />
               <Box sx={{flex: "1 1 0%"}}>
                 {children}
