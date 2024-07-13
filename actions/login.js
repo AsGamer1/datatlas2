@@ -5,7 +5,6 @@ import { signIn } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { AuthError } from "next-auth";
 import { getUser } from "@/data/user";
-import Link from "next/link";
 
 export async function login(values) {
   const validatedFields = LoginUserSchema.safeParse(values);
@@ -21,9 +20,9 @@ export async function login(values) {
   if (rol === "entrenador") {
     return {
       error: (
-        <Link href="/login-admin" className="cursor-default">
+        <a href="/login-admin" className="cursor-default">
           No tienes permisos
-        </Link>
+        </a>
       )
     }
   }

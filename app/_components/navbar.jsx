@@ -1,13 +1,10 @@
 "use client";
 
+import { AppBar, Box, Link, styled, Toolbar } from "@mui/material";
 import dynamic from "next/dynamic";
-import { AppBar, Avatar, Box, Button, styled, Toolbar, useTheme } from "@mui/material";
-import { Link } from "@mui/material";
-const DynamicNavLink = dynamic(() => import("@/components/auth/nav-login-avatar"), { ssr: false })
+const DynamicNavLink = dynamic(() => import("@/app/_components/nav-login-avatar"), { ssr: false })
 
 export default function Navbar({ session }) {
-
-  const theme = useTheme();
 
   const Image = styled(Box)({
     display: "flex",

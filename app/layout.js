@@ -7,7 +7,7 @@ import Sidebar from "@/app/_components/sidebar";
 import BottomMenu from "@/app/_components/bottom-menu";
 import Head from "@/app/head";
 import ClientOnly from "@/app/client-only";
-import { Box, Container, Grid, Stack, ThemeProvider, Toolbar } from "@mui/material";
+import { Box, Stack, ThemeProvider } from "@mui/material";
 import { atlasTheme } from "./theme";
 
 const inter = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });

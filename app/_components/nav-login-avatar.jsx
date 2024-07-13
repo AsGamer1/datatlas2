@@ -16,7 +16,7 @@ export default function NavUserAvatar({ session }) {
     fontWeight: "600",
     borderRadius: 8,
     paddingTop: 8,
-    paddingBottom: 8
+    paddingBottom: 8,
   })
 
   const IconButton = styled(Button)({
@@ -38,9 +38,9 @@ export default function NavUserAvatar({ session }) {
   if (session?.user) {
     return (
       <>
-        <IconButton ref={anchorEl} onClick={() => setIsMenuOpen(true)}>
-          <UserAvatar children={session?.user?.name.split(" ").map(function (item, index) { if (index < 2) return item[0] }).join('')} />
-        </IconButton>
+        <Button ref={anchorEl} onClick={() => setIsMenuOpen(true)} style={{ borderRadius: 8, minWidth: 0, padding: 8 }}>
+          <UserAvatar>{session?.user?.name.split(" ").map(function (item, index) { if (index < 2) return item[0] }).join('')}</UserAvatar>
+        </Button>
         <Menu anchorEl={anchorEl.current} open={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
           <MenuItem onClick={() => { setIsMenuOpen(false); setIsDialogOpen(true) }}>
             <ListItemIcon>
