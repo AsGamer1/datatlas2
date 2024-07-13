@@ -1,9 +1,10 @@
 import { LoginForm } from "@/components/auth/login-admin";
+import { Box } from "@mui/material";
 
 export default function LoginPage() {
   return (
-    <div className="flex justify-center">
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
       <LoginForm />
-    </div>
+    </Box>
   )
 }

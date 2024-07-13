@@ -1,9 +1,10 @@
 import { ErrorCard } from "@/components/auth/error-card";
+import { Box } from "@mui/material";
 
 export default function AuthErrorPage() {
   return (
-    <div className="flex justify-center">
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
       <ErrorCard />
-    </div>
+    </Box>
   )
 }

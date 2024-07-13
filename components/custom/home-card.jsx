@@ -1,15 +1,15 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ChevronRight } from "@mui/icons-material"
+import { Card, CardActionArea, CardContent, CardHeader, Typography } from "@mui/material"
 
-export function HomeCard({title, Icon, contentTitle, content}) {
+export function HomeCard({ title, Icon, route, contentTitle, content }) {
   return (
-    <Card className="lg:w-[300px] bg-white/95 outline-white/95">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">{title}</CardTitle>
-        <Icon className="h-4 w-4 text-muted-foreground"/>
-      </CardHeader>
+    <Card sx={{ borderRadius: 4, minWidth: {xs: "85%", md: "25%"}, "& .MuiCardHeader-action": { marginTop: 0 } }}>
+      <CardActionArea href={route}>
+        <CardHeader sx={{ bgcolor: "hsl(var(--primary))" }} avatar={<Icon />} action={<ChevronRight />} title={title} titleTypographyProps={{ fontWeight: "500" }} />
+      </CardActionArea>
       <CardContent>
-        <p className="text-2xl text-center font-bold">{contentTitle}</p>
-        <p className="text-sm text-center text-muted-foreground">{content}</p>
+        <Typography variant="h6" sx={{ textAlign: "center" }}>{contentTitle}</Typography>
+        <Typography variant="body2" sx={{ textAlign: "center" }}>{content}</Typography>
       </CardContent>
     </Card>
   )

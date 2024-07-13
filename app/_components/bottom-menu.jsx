@@ -1,29 +1,19 @@
 "use client";
 
-import Link from "next/link"
-import { Home, Medal, Trophy } from "lucide-react"
+import { useState } from "react";
+import { EmojiEventsRounded, HomeRounded, WorkspacePremiumRounded } from "@mui/icons-material";
+import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { usePathname } from "next/navigation";
 
 export default function BottomMenu() {
 
-  const pathname = usePathname();
-  const inactive = "flex items-center p-2 gap-2 justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
-  const active = "flex items-center p-2 gap-2 justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground"
+  const [value, setValue] = useState(usePathname())
 
   return (
-    <nav className="fixed bottom-0 w-full flex sm:hidden flex-row justify-around border-t bg-background items-center gap-4 p-3">
-      <Link href="/inicio" className={pathname == "/inicio" ? active : inactive}>
-        <Home className="h-7 w-7" />
-        <span className="sr-only">Inicio</span>
-      </Link>
-      <Link href="/marcas-personales" className={pathname == "/marcas-personales" ? active : inactive}>
-        <Medal className="h-7 w-7" />
-        <span className="sr-only">Marcas personales</span>
-      </Link>
-      <Link href="/records" className={pathname == "/records" ? active : inactive}>
-        <Trophy className="h-7 w-7" />
-        <span className="sr-only">Récords del club</span>
-      </Link>
-    </nav >
+    <BottomNavigation sx={{ height: "4rem", bottom: 0, width: "100%", display: { sm: "none" } }} value={value} onChange={(event, newValue) => { setValue(newValue); }}>
+      <BottomNavigationAction href="/inicio" value="/inicio" label="Inicio" icon={<HomeRounded sx={{ width: "2rem", height: "2rem" }} />} />
+      <BottomNavigationAction href="/records" value="/records" label="Récords" icon={<EmojiEventsRounded sx={{ width: "2rem", height: "2rem" }} />} />
+      <BottomNavigationAction href="/marcas-personales" value="/marcas-personales" label="Mis marcas" icon={<WorkspacePremiumRounded sx={{ width: "2rem", height: "2rem" }} />} />
+    </BottomNavigation>
   )
 }

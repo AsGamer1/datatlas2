@@ -1,9 +1,11 @@
-export default function AuthLayout({children}) {
+import { Box, Container } from "@mui/material";
+
+export default function AuthLayout({ children }) {
   return (
-    <main className="text-center flex flex-col justify-center flex-1">
-      <div className="w-full px-5">
+    <Container sx={{ textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", flex: "1 1 0%" }}>
+      <Box sx={{ width: "100%", paddingX: "1.25rem" }}>
         {children}
-      </div>
-    </main>
+      </Box>
+    </Container>
   )
 }

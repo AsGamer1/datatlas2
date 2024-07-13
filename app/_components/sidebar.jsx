@@ -1,56 +1,58 @@
 "use client";
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import Link from "next/link"
-import { Home, Medal, Trophy } from "lucide-react"
 import { usePathname } from "next/navigation";
+import { Collapse, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from "@mui/material";
+import { useState } from "react";
+import { EmojiEventsRounded, HomeRounded, WorkspacePremiumRounded } from "@mui/icons-material";
 
 export default function Sidebar() {
 
   const pathname = usePathname();
-  const inactive = "flex items-center p-2 gap-2 justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
-  const active = "flex items-center p-2 gap-2 justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground"
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   return (
-    <aside className="hidden sm:flex min-w-14 flex-col border-b bg-background">
-      <nav className="flex flex-col items-center gap-4 p-2">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link href="/inicio" className={pathname == "/inicio" ? active : inactive}>
-                <Home className="h-5 w-5" />
-                <span className="sr-only">Inicio</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Inicio</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link href="/marcas-personales" className={pathname == "/marcas-personales" ? active : inactive}>
-                <Medal className="h-5 w-5" />
-                <span className="sr-only">Marcas personales</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Marcas personales</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </nav>
-      <hr/>
-      <nav className="flex flex-col items-center gap-4 p-2">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link href="/records" className={pathname == "/records" ? active : inactive}>
-                <Trophy className="h-5 w-5" />
-                <span className="sr-only">Récords del club</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Récords</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </nav>
-    </aside>
+    <Drawer onMouseMove={handleOpen} onMouseLeave={handleClose} variant="permanent" open={open} sx={{ display: { xs: "none", sm: "flex" } }}>
+      <Toolbar />
+      <List>
+        <ListItem disablePadding sx={pathname == "/inicio" && { bgcolor: "#00808060" }}>
+          <ListItemButton href="/inicio">
+            <ListItemIcon sx={{ minWidth: "0" }}>
+              <HomeRounded sx={pathname == "/inicio" && { fill: "#0be0e0" }} />
+            </ListItemIcon>
+            <Collapse in={open} orientation="horizontal" sx={{ padding: 0 }}>
+              <ListItemText sx={{ marginY: 0, textWrap: "nowrap", whiteSpaceCollapse: "preserve" }} primary="    Inicio" primaryTypographyProps={pathname == "/inicio" && { color: "#0be0e0" }} />
+            </Collapse>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding sx={pathname == "/records" && { bgcolor: "#00808060" }}>
+          <ListItemButton href="/records">
+            <ListItemIcon sx={{ minWidth: "0" }}>
+              <EmojiEventsRounded sx={pathname == "/records" && { fill: "#0be0e0" }} />
+            </ListItemIcon>
+            <Collapse in={open} orientation="horizontal" sx={{ padding: 0 }}>
+              <ListItemText sx={{ marginY: 0, textWrap: "nowrap", whiteSpaceCollapse: "preserve" }} primary="    Récords del Club" primaryTypographyProps={pathname == "/records" && { color: "#0be0e0" }} />
+            </Collapse>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding sx={pathname == "/marcas-personales" && { bgcolor: "#00808060" }}>
+          <ListItemButton href="/marcas-personales">
+            <ListItemIcon sx={{ minWidth: "0" }}>
+              <WorkspacePremiumRounded sx={pathname == "/marcas-personales" && { fill: "#0be0e0" }} />
+            </ListItemIcon>
+            <Collapse in={open} orientation="horizontal" sx={{ padding: 0 }}>
+              <ListItemText sx={{ marginY: 0, textWrap: "nowrap", whiteSpaceCollapse: "preserve" }} primary="    Mis Marcas" primaryTypographyProps={pathname == "/marcas-personales" && { color: "#0be0e0" }} />
+            </Collapse>
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Drawer>
   )
 }

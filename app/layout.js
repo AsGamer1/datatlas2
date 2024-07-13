@@ -7,8 +7,10 @@ import Sidebar from "@/app/_components/sidebar";
 import BottomMenu from "@/app/_components/bottom-menu";
 import Head from "@/app/head";
 import ClientOnly from "@/app/client-only";
+import { Container, ThemeProvider, Toolbar } from "@mui/material";
+import { atlasTheme } from "./theme";
 
-const inter = Poppins({ subsets: ["latin"], weight: ["600"] });
+const inter = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
 export default async function RootLayout({ children }) {
 
@@ -18,13 +20,18 @@ export default async function RootLayout({ children }) {
     <SessionProvider session={session}>
       <html>
         <Head />
-        <body className={`${inter.className} grid grid-rows-10 xs:flex xs:flex-col sm:flex sm:flex-col h-screen bg-secondary-foreground`}>
-          <Navbar />
-          <div className="flex flex-row row-span-8 flex-1">
-            {session && <Sidebar />}
-            {children}
-          </div>
-          {session && <BottomMenu />}
+        <body className={inter.className}>
+          <ThemeProvider theme={atlasTheme}>
+            <Container maxWidth="none" sx={{ height: "100dvh", width: "100%", display: "flex", flexDirection: "column", padding: 0 }}>
+              <Navbar session={session} />
+              {session && <Sidebar />}
+              <Container maxWidth="none" sx={{ flex: "1 1 0%", display: "flex", justifyContent: "center" }}>
+                <Toolbar sx={{ display: { xs: "none", sm: "inherit" } }} />
+                {children}
+              </Container>
+              {session && <BottomMenu />}
+            </Container>
+          </ThemeProvider>
           <ClientOnly />
         </body>
       </html>

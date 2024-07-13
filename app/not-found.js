@@ -1,22 +1,21 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { auth } from "@/auth";
+import { Box, Button, Container, Typography } from "@mui/material";
 
 export default async function NotFound() {
 
   const session = await auth()
 
   return (
-    <main className="text-white text-center flex flex-col justify-center flex-1">
-      <div className="w-full px-5">
-        <h1 className="text-[calc(1.2rem+2.7vw)] lg:text-[3.5rem] leading-[1.2] font-semibold">Ha habido un problema</h1>
-        <p className="text-lg m-2">No hemos encontrado la página</p>
-      </div>
-      <div className="m-2 cursor-pointer transition duration-200 ease-in-out font-semibold">
-        <Button variant="default">
-          <Link href={session ? "/inicio" : "/"}>Ir al inicio</Link>
+    <Container sx={{ color: "white", textAlign: "center", display: "flex", flexDirection: "column", justifyContent: "center", flex: "1 1 0%" }}>
+      <Box sx={{ width: "100%", paddingX: "1.25rem" }}>
+        <Typography variant="h1" sx={{ fontSize: { xs: "2rem", lg: "3.5rem" }, lineHeight: "1.2", fontWeight: "600" }}>404</Typography>
+        <Typography variant="body1" sx={{ fontSize: "1.125rem", lineHeight: "1.75rem", margin: "0.5rem" }}>No hemos encontrado la página</Typography>
+      </Box>
+      <Box>
+        <Button href={session ? "/inicio" : "/"}>
+          Ir a inicio
         </Button>
-      </div>
-    </main>
+      </Box>
+    </Container>
   )
 }
