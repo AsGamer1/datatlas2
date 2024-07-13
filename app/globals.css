@@ -103,4 +103,7 @@
   input, textarea, select, button {
     font-size: 16px; /* Tamaño de fuente mínimo para evitar zoom en iOS */
   }
+  *:focus {
+    outline: none;
+}
 }
