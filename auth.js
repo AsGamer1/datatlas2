@@ -1,3 +1,9 @@
+/* 
+  Auth
+  En este archivo se declara configuración importante para la autorización en la web
+  Se complementa con el archivo @/auth.config.js
+*/
+
 import NextAuth from "next-auth"
 import authConfig from "@/auth.config";
 
@@ -8,15 +14,16 @@ import { getUserById } from "@/data/user";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
-    signIn: "/login",
-    error: "/auth-error",
-    signOut: "/logout"
+    signIn: "/auth/login",
+    error: "/auth/error",
+    signOut: "/auth/logout"
   },
   callbacks: {
     async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = token.sub
         session.user.birthdate = token.birthdate
+        session.user.image = token.picture
       }
       return session
     },
@@ -26,6 +33,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (!existingUser) return token
       token.name = existingUser.nombre
       token.birthdate = existingUser.nacimiento
+      token.picture = existingUser.rol
       return token
     }
   },

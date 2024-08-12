@@ -1,15 +1,25 @@
-import { History, Medal, Trophy } from "lucide-react";
-import { HomeCard } from "@/components/custom/home-card";
+import { HomeCard } from "@/app/_components/custom/home-card";
+import { Box, Typography } from "@mui/material";
+import { WorkspacePremiumRounded, HistoryRounded, EmojiEventsRounded } from "@mui/icons-material";
+import { auth } from "@/auth";
 
-export default function Home() {
+export default async function Home() {
+
+  const session = await auth();
+
   return (
-    <main className="text-white flex flex-col justify-center mx-auto px-5 lg:max-w-[calc(min(100vw-60px,1220px))]">
-      <h1 className="text-center text-[calc(1.475rem+2.7vw)] lg:text-[3.5rem] leading-[1.2] mb-6 font-semibold">La <span className="bg-clip-text text-transparent bg-secondary capitalize">base</span><span className="bg-clip-text text-transparent bg-tertiary capitalize"> de </span><span className="bg-clip-text text-transparent bg-primary capitalize">datos</span><br /> de tu club favorito</h1>
-      <div className="flex flex-col lg:flex-row gap-4">
-        <HomeCard title="Marcas personales" Icon={Medal} contentTitle="Temporadas" content="desde 2023 hasta hoy" />
-        <HomeCard title="Récords del club" Icon={Trophy} contentTitle="Pruebas" content="todas las de pista" />
-        <HomeCard title="Historial de competiciones" Icon={History} contentTitle="Participaciones" content="pista, cross, trail, ruta" />
-      </div>
-    </main>
+    session ?
+      <></>
+      :
+      <>
+        <Typography variant="h1" sx={{ textAlign: "center", fontSize: { xs: "1.8rem", lg: "3.5rem" }, lineHeight: "1.2", fontWeight: "600", marginBottom: "1.5rem" }}>
+          La <span style={{ color: "#7AFFFF" }}>Base</span><span style={{ color: "#0BE0E0" }}> De </span><span style={{ color: "#008080" }}>Datos</span><br /> de tu club favorito
+        </Typography>
+        <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: "1rem", justifyContent: "center", alignItems: "center" }}>
+          <HomeCard route="/marcas-personales" title="Marcas personales" Icon={WorkspacePremiumRounded} contentTitle="Temporadas" content="desde 2023 hasta hoy" />
+          <HomeCard route="/" title="Récords del club" Icon={EmojiEventsRounded} contentTitle="Pruebas" content="todas las de pista" />
+          <HomeCard route="/" title="Historial" Icon={HistoryRounded} contentTitle="Participaciones" content="pista, cross, trail, ruta" />
+        </Box>
+      </>
   );
 }

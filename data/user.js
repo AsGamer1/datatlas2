@@ -1,3 +1,6 @@
+/* 
+  Funciones reutilizadas a lo largo del programa para obtener el objeto usuario a partir de campos únicos
+*/
 import { db } from "@/lib/db"
 
 export async function getUser(dni) {
