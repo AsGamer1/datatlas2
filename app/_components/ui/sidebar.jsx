@@ -20,7 +20,7 @@ export default function Sidebar() {
   }
 
   return (
-    <Drawer onMouseMove={handleOpen} onMouseLeave={handleClose} variant="permanent" open={open} sx={{ display: { xs: "none", sm: "flex" } }}>
+    <Drawer onMouseMove={handleOpen} onMouseLeave={handleClose} variant="permanent" open={open} sx={{ display: { xs: "none", sm: "flex" }, "& .MuiDrawer-paper": {borderRight: "none"} }}>
       <Toolbar />
       <List>
         <ListItem disablePadding sx={pathname == DEFAULT_LOGIN_REDIRECT && { bgcolor: "#008080" }}>

@@ -17,7 +17,7 @@ export default async function Home() {
         </Typography>
         <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: "1rem", justifyContent: "center", alignItems: "center" }}>
           <HomeCard route="/marcas-personales" title="Marcas personales" Icon={WorkspacePremiumRounded} contentTitle="Temporadas" content="desde 2023 hasta hoy" />
-          <HomeCard route="/" title="Récords del club" Icon={EmojiEventsRounded} contentTitle="Pruebas" content="todas las de pista" />
+          <HomeCard route="/records" title="Récords del club" Icon={EmojiEventsRounded} contentTitle="Pruebas" content="todas las de pista" />
           <HomeCard route="/" title="Historial" Icon={HistoryRounded} contentTitle="Participaciones" content="pista, cross, trail, ruta" />
         </Box>
       </>
