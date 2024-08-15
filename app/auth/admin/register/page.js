@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterAdminSchema } from "@/schemas";
 import { registerAdmin } from "@/actions/register-admin";
 import { useState, useTransition } from "react";
-import { Check, Close, LockOutlined } from "@mui/icons-material";
+import { Check, Close, ShieldRounded } from "@mui/icons-material";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
@@ -45,7 +45,7 @@ export default function RegisterAdminForm() {
           <Stack sx={{ justifyContent: "center", alignItems: "center", gap: 2 }}>
             <Stack sx={{ justifyContent: "center", alignItems: "center", gap: 1 }}>
               <Avatar sx={{ bgcolor: "secondary.main" }}>
-                <LockOutlined />
+                <ShieldRounded />
               </Avatar>
               <Typography variant="h5">Portal de entrenadores</Typography>
             </Stack>

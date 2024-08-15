@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterUserSchema } from "@/schemas";
 import { registerUser } from "@/actions/register";
 import { useState, useTransition } from "react";
-import { Check, Close, LockOutlined } from "@mui/icons-material";
+import { Check, Close, PersonRounded } from "@mui/icons-material";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateField, LocalizationProvider } from "@mui/x-date-pickers";
@@ -44,7 +44,7 @@ export default function RegisterForm() {
           <Stack sx={{ justifyContent: "center", alignItems: "center", gap: 2 }}>
             <Stack sx={{ justifyContent: "center", alignItems: "center", gap: 1 }}>
               <Avatar sx={{ bgcolor: "secondary.main" }}>
-                <LockOutlined />
+                <PersonRounded />
               </Avatar>
               <Typography variant="h5">Portal de atletas</Typography>
             </Stack>

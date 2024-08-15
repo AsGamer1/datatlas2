@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginAdminSchema } from "@/schemas";
 import { login } from "@/actions/login-admin";
 import { useState, useTransition } from "react";
-import { Check, Close, LockOutlined } from "@mui/icons-material";
+import { Check, Close, ShieldRounded } from "@mui/icons-material";
 
 export default function LoginAdminForm() {
 
@@ -39,7 +39,7 @@ export default function LoginAdminForm() {
           <Stack sx={{ justifyContent: "center", alignItems: "center", gap: 2 }}>
             <Stack sx={{ justifyContent: "center", alignItems: "center", gap: 1 }}>
               <Avatar sx={{ bgcolor: "secondary.main" }}>
-                <LockOutlined />
+                <ShieldRounded />
               </Avatar>
               <Typography variant="h5">Portal de entrenadores</Typography>
             </Stack>

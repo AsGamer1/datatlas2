@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginUserSchema } from "@/schemas";
 import { login } from "@/actions/login";
 import { useState, useTransition } from "react";
-import { Check, Close, LockOutlined } from "@mui/icons-material";
+import { Check, Close, PersonRounded } from "@mui/icons-material";
 
 export default function LoginForm() {
 
@@ -38,7 +38,7 @@ export default function LoginForm() {
           <Stack sx={{ justifyContent: "center", alignItems: "center", gap: 2 }}>
             <Stack sx={{ justifyContent: "center", alignItems: "center", gap: 1 }}>
               <Avatar sx={{ bgcolor: "secondary.main" }}>
-                <LockOutlined />
+                <PersonRounded />
               </Avatar>
               <Typography variant="h5">Portal de atletas</Typography>
             </Stack>

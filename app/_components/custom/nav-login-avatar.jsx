@@ -27,6 +27,8 @@ export default function NavUserAvatar({ session }) {
     fontWeight: "600"
   })
 
+  // UserAvatar devuelve las iniciales del atleta, nombre y primer apellido. Si el atleta tiene dos nombres devolverá las iniciales de estos
+
   if (session?.user) {
     return (
       <>

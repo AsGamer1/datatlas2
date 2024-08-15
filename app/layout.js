@@ -4,6 +4,7 @@ import { auth } from "@/auth";
 import "./globals.css";
 import Navbar from "@/app/_components/ui/navbar";
 import Sidebar from "@/app/_components/ui/sidebar";
+import SidebarAdmin from "@/app/_components/ui/sidebar-admin";
 import BottomMenu from "@/app/_components/ui/bottom-menu";
 import Head from "@/app/head";
 import ClientOnly from "@/app/client-only";
@@ -27,7 +28,8 @@ export default async function RootLayout({ children }) {
               <Container sx={{ color: "white", display: "flex", flexDirection: "column", flex: "1 1 0%", justifyContent: "center" }}>
                 {children}
               </Container>
-              {session && <Sidebar />}
+              {session?.user?.image == "atleta" && <Sidebar />}
+              {session?.user?.image == "entrenador" && <SidebarAdmin />}
               {session && <BottomMenu />}
             </Stack>
           </ThemeProvider>
