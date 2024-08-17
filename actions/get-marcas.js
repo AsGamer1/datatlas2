@@ -16,7 +16,8 @@ export async function getMarcasRegistradas() {
             }
           }
         }
-      }
+      },
+      take: -10
     })
 
     const data = fetch.map(compite => ({
