@@ -17,7 +17,7 @@ export default function Navbar({ session }) {
   })
 
   return (
-    <AppBar enableColorOnDark color="secondary" position="sticky" sx={{ backgroundImage: 'none', zIndex: theme.zIndex.drawer + 1 }}>
+    <AppBar enableColorOnDark color="secondary" position="fixed" sx={{ backgroundImage: 'none', zIndex: theme.zIndex.drawer + 1 }}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <Link href={DEFAULT_LOGIN_REDIRECT} underline="none">
           <Image component="img" src="/icons/logo_letras.png" alt="Club Atletisme Atlas" sx={{ height: { xs: "60px", sm: "52px" } }} />

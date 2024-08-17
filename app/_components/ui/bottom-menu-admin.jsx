@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { EmojiEventsRounded, HomeRounded, WorkspacePremiumRounded } from "@mui/icons-material";
+import { AdminPanelSettingsRounded, EmojiEventsRounded, HomeRounded, WorkspacePremiumRounded } from "@mui/icons-material";
 import { BottomNavigation, BottomNavigationAction, useTheme } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
-export default function BottomMenu() {
+export default function BottomMenuAdmin() {
 
   const [value, setValue] = useState(usePathname())
   const theme = useTheme();
@@ -16,6 +16,7 @@ export default function BottomMenu() {
       <BottomNavigationAction href={DEFAULT_LOGIN_REDIRECT} value={DEFAULT_LOGIN_REDIRECT} label="Inicio" icon={<HomeRounded sx={{ width: "2rem", height: "2rem" }} />} />
       <BottomNavigationAction href="/records" value="/records" label="Récords" icon={<EmojiEventsRounded sx={{ width: "2rem", height: "2rem" }} />} />
       <BottomNavigationAction href="/marcas-personales" value="/marcas-personales" label="Mis marcas" icon={<WorkspacePremiumRounded sx={{ width: "2rem", height: "2rem" }} />} />
+      <BottomNavigationAction href="/admin/panel" value="/admin/panel" label="Panel" icon={<AdminPanelSettingsRounded sx={{ width: "2rem", height: "2rem" }} />} />
     </BottomNavigation>
   )
 }

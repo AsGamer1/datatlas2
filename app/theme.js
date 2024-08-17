@@ -31,6 +31,14 @@ export const atlasTheme = createTheme({
           height: 84
         }
       }
-    }
+    },
+    MuiDataGrid: {
+      styleOverrides: {
+        root: {
+          ["--DataGrid-containerBackground"]: "#008080 !important",
+          border: "none",
+        },
+      },
+    },
   }
 });
