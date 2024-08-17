@@ -23,16 +23,16 @@ export default function AdminPanel() {
   return (
     <Grid container spacing={2} sx={{ paddingX: 2, marginY: 2 }}>
       <Grid item xs={12} md={6}>
-        <Table title="Futuros eventos" data={eventosFuturos} />
+        <Table title="Futuros eventos" fetch={eventosFuturos} />
       </Grid>
       <Grid item xs={12} md={6}>
-        <Table title="Marcas registradas" data={marcasRegistradas} />
+        <Table title="Marcas registradas" fetch={marcasRegistradas} />
       </Grid>
       <Grid item xs={12} md={6}>
-        <Table title="Atletas registrados" data={undefined} />
+        <Table title="Atletas registrados" fetch={undefined} />
       </Grid>
       <Grid item xs={12} md={6}>
-        <Table title="Entrenadores registrados" data={undefined} />
+        <Table title="Entrenadores registrados" fetch={undefined} />
       </Grid>
     </Grid>
   )

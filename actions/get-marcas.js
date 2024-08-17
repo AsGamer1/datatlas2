@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 
 export async function getMarcasRegistradas() {
   try {
-    const resultados = await db.compite.findMany({
+    const fetch = await db.compite.findMany({
       include: {
         usuario: true,
         participacion: {
@@ -19,16 +19,16 @@ export async function getMarcasRegistradas() {
       }
     })
 
-    if (resultados.length > 0) {
-      return resultados.map(compite => ({
-        id: compite.id_participacion & compite.id_usuario,
-        Nombre: compite.usuario.nombre,
-        Prueba: compite.participacion.competicion.prueba.nombre,
-        Marca: compite.participacion.marca,
-      }));
-    } else {
-      return [{ id: 0, Nombre: "", Prueba: "", Marca: "" }]
-    }
+    const data = fetch.map(compite => ({
+      id: compite.id_participacion & compite.id_usuario,
+      Nombre: compite.usuario.nombre,
+      Prueba: compite.participacion.competicion.prueba.nombre,
+      Marca: compite.participacion.marca,
+    }))
+
+    const columns = ["Nombre", "Prueba", "Marca"].map((field) => { return { field: field, flex: 1, headerAlign: 'center', align: 'center' } })
+
+    return { columns: columns, data: data }
   } catch (error) {
     return null
   }
