@@ -15,16 +15,14 @@ export async function getFuturosEventos() {
       }
     });
 
-    const data = fetch.length > 0 ?
-      fetch.map(evento => ({
-        id: evento.id,
-        Fecha: evento.fecha.toLocaleDateString(),
-        Evento: evento.nombre,
-        Lugar: evento.lugar.nombre,
-      })) :
-      [{ id: 0, Fecha: "", Evento: "", Lugar: "" }]
+    const data = fetch.map(evento => ({
+      id: evento.id,
+      Fecha: evento.fecha.toLocaleDateString(),
+      Evento: evento.nombre,
+      Lugar: evento.lugar.nombre,
+    }))
 
-    const columns = Object.keys(data[0] || {}).slice(1).map((field) => { return { field: field, flex: 1, headerAlign: 'center', align: 'center' } })
+    const columns = ["Fecha", "Evento", "Lugar"].map((field) => { return { field: field, flex: 1, headerAlign: 'center', align: 'center' } })
 
     return { columns: columns, data: data }
   } catch (error) {
