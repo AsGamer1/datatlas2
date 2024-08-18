@@ -1,5 +1,5 @@
-import { AddRounded } from "@mui/icons-material";
-import { IconButton, Paper, styled, Typography } from "@mui/material";
+import { AddRounded, CloseRounded } from "@mui/icons-material";
+import { Button, IconButton, Paper, Stack, styled, Typography } from "@mui/material";
 import { DataGrid, gridClasses, GridToolbarContainer } from "@mui/x-data-grid";
 
 export default function Table({ title, fetch }) {
@@ -17,6 +17,14 @@ export default function Table({ title, fetch }) {
           <AddRounded />
         </IconButton>
       </GridToolbarContainer>
+    )
+  }
+
+  const NoRows = () => {
+    return (
+      <Stack sx={{ alignItems: "center", justifyContent: "center", height: "100%" }}>
+        <Typography variant="body2">{`No hay ${title.toLowerCase()}`}</Typography>
+      </Stack>
     )
   }
 
@@ -60,11 +68,11 @@ export default function Table({ title, fetch }) {
     >
       <Table
         loading={isLoading}
-        slots={{ toolbar: Toolbar }}
+        slots={{ toolbar: Toolbar, noRowsOverlay: NoRows }}
         slotProps={{
           loadingOverlay: {
             variant: "skeleton",
-            noRowsVariant: "skeleton"
+            noRowsVariant: "skeleton",
           }
         }}
         columns={columns}
