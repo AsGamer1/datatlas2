@@ -20,7 +20,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <SessionProvider session={session}>
-      <html>
+      <html lang="es">
         <Head />
         <body className={inter.className}>
           <ThemeProvider theme={atlasTheme}>

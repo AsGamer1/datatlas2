@@ -41,6 +41,9 @@ export default function Table({ title, fetch }) {
     },
     "& .MuiDataGrid-scrollbar": {
       scrollbarWidth: "thin"
+    },
+    "& .MuiDataGrid-columnHeader": {
+      backgroundColor: "transparent"
     }
   }))
 
