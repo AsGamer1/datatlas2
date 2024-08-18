@@ -27,7 +27,14 @@ export async function getMarcasRegistradas() {
       Marca: compite.participacion.marca,
     }))
 
-    const columns = ["Nombre", "Prueba", "Marca"].map((field) => { return { field: field, flex: 1, headerAlign: 'center', align: 'center' } })
+    const columns = ["Nombre", "Prueba", "Marca"].map((field) => {
+      return {
+        field: field,
+        flex: 1,
+        headerAlign: 'center',
+        align: 'center'
+      }
+    })
 
     return { columns: columns, data: data }
   } catch (error) {

@@ -22,7 +22,14 @@ export async function getFuturosEventos() {
       Lugar: evento.lugar.nombre,
     }))
 
-    const columns = ["Fecha", "Evento", "Lugar"].map((field) => { return { field: field, flex: 1, headerAlign: 'center', align: 'center' } })
+    const columns = ["Fecha", "Evento", "Lugar"].map((field) => {
+      return {
+        field: field,
+        flex: 1,
+        headerAlign: 'center',
+        align: 'center'
+      }
+    })
 
     return { columns: columns, data: data }
   } catch (error) {
