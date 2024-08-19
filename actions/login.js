@@ -22,7 +22,7 @@ export async function login(values) {
 
   const rol = (await getUser(dni))?.rol
 
-  if (rol === "entrenador") {
+  if (rol === "entrenador" || rol === "admin") {
     return {
       error: (
         <a href={ADMIN_LOGIN_PAGE} style={{ textDecoration: "none", cursor: "default", color: "white" }}>
