@@ -7,8 +7,11 @@ import { getFuturosEventos } from "@/actions/get-eventos";
 import { getMarcasRegistradas } from "@/actions/get-marcas";
 import { getAtletasRegistrados } from "@/actions/get-atletas";
 import { getEntrenadoresRegistrados } from "@/actions/get-entrenadores";
+import { useSession } from "next-auth/react";
 
 export default function AdminPanel() {
+
+  const session = useSession();
 
   const [eventosFuturos, setEventosFuturos] = useState(undefined)
   const [marcasRegistradas, setMarcasRegistradas] = useState(undefined)
@@ -38,10 +41,10 @@ export default function AdminPanel() {
         <Table title="Marcas registradas" fetch={marcasRegistradas} />
       </Grid>
       <Grid item xs={12} md={6}>
-        <Table title="Atletas registrados" fetch={atletasRegistrados} />
+        <Table title="Atletas registrados" fetch={atletasRegistrados} action="/auth/register" />
       </Grid>
       <Grid item xs={12} md={6}>
-        <Table title="Entrenadores registrados" fetch={entrenadoresRegistrados} />
+        <Table title="Entrenadores registrados" fetch={entrenadoresRegistrados} action="/auth/admin/register" disabled={session?.data?.user.image !== "admin"} />
       </Grid>
     </Grid>
   )

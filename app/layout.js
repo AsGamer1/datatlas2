@@ -36,7 +36,7 @@ export default async function RootLayout({ children }) {
                   <BottomMenu />
                 </>
               }
-              {session?.user?.image == "entrenador" &&
+              {(session?.user?.image == "entrenador" || session?.user?.image == "admin") &&
                 <>
                   <SidebarAdmin />
                   <BottomMenuAdmin />

@@ -1,8 +1,8 @@
-import { AddRounded, CloseRounded } from "@mui/icons-material";
-import { Button, IconButton, Paper, Stack, styled, Typography } from "@mui/material";
+import { AddRounded } from "@mui/icons-material";
+import { IconButton, Paper, Stack, styled, Typography } from "@mui/material";
 import { DataGrid, gridClasses, GridToolbarContainer } from "@mui/x-data-grid";
 
-export default function Table({ title, fetch }) {
+export default function Table({ title, fetch, action, disabled }) {
 
   const columns = fetch?.columns || Array(3).fill().map(() => ({ ...{ field: "", flex: 1, headerAlign: 'center', align: 'center' } }))
   const data = fetch?.data
@@ -13,7 +13,7 @@ export default function Table({ title, fetch }) {
     return (
       <GridToolbarContainer sx={{ padding: 1, display: "flex", justifyContent: "center", bgcolor: "#008080", color: "white" }}>
         <Typography variant="h6">{title}</Typography>
-        <IconButton color="info" size="small" sx={{ position: "absolute", right: 0, margin: 0.6 }}>
+        <IconButton href={action} disabled={disabled} color="info" size="small" sx={{ position: "absolute", right: 0, margin: 0.6 }}>
           <AddRounded />
         </IconButton>
       </GridToolbarContainer>
@@ -42,6 +42,9 @@ export default function Table({ title, fetch }) {
     },
     "& .MuiDataGrid-columnHeaderTitle": {
       cursor: "text",
+      whiteSpace: "normal !important",
+      wordWrap: "normal !important",
+      textAlign: "center",
       color: "white "
     },
     "& .MuiDataGrid-columnSeparator": {
@@ -52,7 +55,7 @@ export default function Table({ title, fetch }) {
     },
     "& .MuiDataGrid-columnHeader": {
       backgroundColor: "transparent"
-    }
+    },
   }))
 
   return (
@@ -63,7 +66,7 @@ export default function Table({ title, fetch }) {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "calc((100vh - 84px - 4rem) / 2)"
+        height: "calc((100vh - 84px - 4rem) / 2)",
       }}
     >
       <Table

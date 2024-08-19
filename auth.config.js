@@ -23,8 +23,8 @@ export default {
           // Si el rol del usuario es el de un atleta, se devuelve directamente el usuario
           if (usuario?.rol === "atleta") {
             return usuario
-            // Pero si el rol es de entrenador, se comprueba que la contraseña coincida con el hash de la base de datos antes de devolver el usuario
-          } else if (usuario?.rol === "entrenador") {
+            // Pero si el rol es de entrenador o admin, se comprueba que la contraseña coincida con el hash de la base de datos antes de devolver el usuario
+          } else if (usuario?.rol === "entrenador" || usuario?.rol === "admin") {
             const admin = LoginAdminSchema.safeParse(credentials)
             if (admin.success) {
               const { password } = admin.data

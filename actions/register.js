@@ -17,7 +17,7 @@ dayjs.extend(utc);
 export async function registerUser(values) {
   // Comprueba la sesión actual, si el usuario no es entrenador, no se le permite continuar con la ejecución de esta acción
   const session = await auth();
-  if (session?.user?.image !== "entrenador") return { error: "Permiso denegado" }
+  if (session?.user?.image !== "entrenador" && session?.user?.image !== "admin") return { error: "Permiso denegado" }
 
   const validatedFields = RegisterUserSchema.safeParse(values);
 

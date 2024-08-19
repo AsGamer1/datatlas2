@@ -25,6 +25,6 @@ export const LoginAdminSchema = z.object({
 export const RegisterAdminSchema = z.object({
   nombre: z.string({ message: "" }).min(1, { message: "" }),
   dni: z.string({ message: "" }).min(1, { message: "" }),
-  nacimiento: z.date({ message: "" }),
+  nacimiento: z.coerce.date({ message: "" }),
   password: z.string({ message: "" }).min(6, { message: "" })
 })

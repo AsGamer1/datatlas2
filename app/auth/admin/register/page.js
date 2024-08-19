@@ -73,7 +73,7 @@ export default function RegisterAdminForm() {
               }}
             />
             <TextField {...register("password")} label="Contraseña" error={!!errors.password} helperText={errors.password?.message} disabled={isPending} fullWidth required type="password" />
-            <Button sx={{ textTransform: "none", fontWeight: "600" }} type="submit" variant="contained" disabled={isPending} fullWidth>Registrar atleta</Button>
+            <Button sx={{ textTransform: "none", fontWeight: "600" }} type="submit" variant="contained" disabled={isPending} fullWidth>Registrar entrenador</Button>
           </Stack>
         </Paper>
       </form>

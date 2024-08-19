@@ -8,7 +8,7 @@ import authConfig from "@/auth.config"
 import NextAuth from "next-auth"
 const { auth } = NextAuth(authConfig)
 
-import { DEFAULT_LOGIN_REDIRECT, apiAuthPrefix, authRoutes, publicRoutes, adminRoutes, DEFAULT_LOGOUT_REDIRECT } from "@/routes"
+import { DEFAULT_LOGIN_REDIRECT, apiAuthPrefix, authRoutes, publicRoutes, trainerRoutes, adminRoutes, DEFAULT_LOGOUT_REDIRECT } from "@/routes"
 
 export default auth((req) => {
   const { nextUrl } = req
@@ -17,6 +17,7 @@ export default auth((req) => {
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
   const isAuthRoute = authRoutes.includes(nextUrl.pathname)
+  const isTrainerRoute = trainerRoutes.includes(nextUrl.pathname)
   const isAdminRoute = adminRoutes.includes(nextUrl.pathname)
 
   // Permite todo acceso a la ruta de la API de autorización
@@ -38,12 +39,22 @@ export default auth((req) => {
     return Response.redirect(new URL(DEFAULT_LOGOUT_REDIRECT, nextUrl))
   }
 
-  // Si es una ruta para entrenadores, solo permite el acceso si el rol del usuario es el de entrenador
+  // Si es una ruta para entrenadores, solo permite el acceso si el rol del usuario es el de entrenador o admin
   // Este rol se almacena en una propiedad libre del objeto user, perteneciente a la sesión activa
   // Tras intentar crear una propiedad personalizada, sin éxito, se decidió almacenarlo en "image"
+  if (isTrainerRoute) {
+    if (isLoggedIn) {
+      if (req.auth.user.image !== "entrenador" && req.auth.user.image !== "admin") {
+        return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
+      }
+    }
+    return null
+  }
+
+  // Si es una ruta de admin, solo permite el acceso si el rol del usuario es de admin (reservado para el dev y el presi)
   if (isAdminRoute) {
     if (isLoggedIn) {
-      if (req.auth.user.image !== "entrenador") {
+      if (req.auth.user.image !== "admin") {
         return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
       }
     }
