@@ -7,7 +7,14 @@ export async function getEntrenadoresRegistrados() {
   try {
     const fetch = await db.usuario.findMany({
       where: {
-        rol: "entrenador"
+        OR: [
+          {
+            rol: "admin"
+          },
+          {
+            rol: "entrenador"
+          }
+        ]
       }
     });
 
