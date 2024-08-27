@@ -18,7 +18,7 @@ function EditorToolbar(props) {
   }
 
   return (
-    <GridToolbarContainer key="grid-toolbar-container" sx={{ padding: 1, display: "flex", bgcolor: "#008080", color: "white" }}>
+    <GridToolbarContainer sx={{ padding: 1, display: "flex", bgcolor: "#008080", color: "white" }}>
       <Button disabled={isLoading} key="toolbar-add-evento" startIcon={<AddRounded />} color="inherit" onClick={AddRow}>
         Añadir evento
       </Button>
@@ -31,8 +31,8 @@ function EditorToolbar(props) {
 
 function NoRows() {
   return (
-    <Stack key="no-rows-overlay" sx={{ alignItems: "center", justifyContent: "center", height: "100%" }}>
-      <Typography key="no-rows-text" variant="body2">No hay eventos</Typography>
+    <Stack sx={{ alignItems: "center", justifyContent: "center", height: "100%" }}>
+      <Typography variant="body2">No hay eventos</Typography>
     </Stack>
   )
 }
@@ -62,8 +62,8 @@ function CustomEditDate(props) {
   }))
 
   return (
-    <LocalizationProvider key={`localization-provider-${id}`} dateAdapter={AdapterDayjs} adapterLocale="es">
-      <DateInput fullWidth key={`date-field-${id}`} value={dayjs(value)} onChange={(newValue) => handleValueChange(newValue)} />
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
+      <DateInput fullWidth value={dayjs(value)} onChange={(newValue) => handleValueChange(newValue)} />
     </LocalizationProvider>
   )
 }
@@ -71,7 +71,7 @@ function CustomEditDate(props) {
 export default function EditorEventos() {
 
   const [data, setData] = useState(undefined);
-  const [columns, setColumns] = useState(Array(3).fill().map(() => ({ ...{ field: "", flex: 1, headerAlign: 'center', align: 'center' } })));
+  const [columns, setColumns] = useState(Array(3).fill().map((_, index) => ({ ...{ id: index, field: "", flex: 1, headerAlign: 'center', align: 'center' } })));
 
   useEffect(() => {
     async function fetchData() {
@@ -122,7 +122,6 @@ export default function EditorEventos() {
   return (
     <Paper
       elevation={5}
-      key="table-paper"
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -135,7 +134,6 @@ export default function EditorEventos() {
       }}
     >
       <Table
-        key="table-table"
         loading={isLoading}
         slots={{ toolbar: EditorToolbar, noRowsOverlay: NoRows }}
         slotProps={{

@@ -4,7 +4,7 @@ import { DataGrid, gridClasses, GridToolbarContainer } from "@mui/x-data-grid";
 
 export default function Table({ title, fetch, action, disabled }) {
 
-  const columns = fetch?.columns || Array(3).fill().map(() => ({ ...{ field: "", flex: 1, headerAlign: 'center', align: 'center' } }))
+  const columns = fetch?.columns || Array(3).fill().map((_, index) => ({ ...{ id: index, field: "", flex: 1, headerAlign: 'center', align: 'center' } }))
   const data = fetch?.data
 
   const isLoading = !data

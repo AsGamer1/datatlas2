@@ -34,17 +34,17 @@ export default function AdminPanel() {
 
   return (
     <Grid container spacing={2} sx={{ paddingX: 2, marginY: 2 }}>
-      <Grid item xs={12} md={6}>
-        <Table title="Próximos eventos" fetch={eventosFuturos} action="/admin/editor/eventos" />
+      <Grid item key="proximos-eventos-grid-item" xs={12} md={6}>
+        <Table key="proximos-eventos-table" title="Próximos eventos" fetch={eventosFuturos} action="/admin/editor/eventos" />
       </Grid>
-      <Grid item xs={12} md={6}>
-        <Table title="Marcas registradas" fetch={marcasRegistradas} action="/admin/editor/marcas" />
+      <Grid item key="marcas-registradas-grid-item" xs={12} md={6}>
+        <Table key="marcas-registradas-table" title="Marcas registradas" fetch={marcasRegistradas} action="/admin/editor/marcas" />
       </Grid>
-      <Grid item xs={12} md={6}>
-        <Table title="Atletas registrados" fetch={atletasRegistrados} action="/auth/register" />
+      <Grid item key="atletas-registrados-grid-item" xs={12} md={6}>
+        <Table key="atletas-registrados-table" title="Atletas registrados" fetch={atletasRegistrados} action="/auth/register" />
       </Grid>
-      <Grid item xs={12} md={6}>
-        <Table title="Entrenadores registrados" fetch={entrenadoresRegistrados} action="/auth/admin/register" disabled={session?.data?.user.image !== "admin"} />
+      <Grid item key="entrenadores-registrados-grid-item" xs={12} md={6}>
+        <Table key="entrenadores-registrados" title="Entrenadores registrados" fetch={entrenadoresRegistrados} action="/auth/admin/register" disabled={session?.data?.user.image !== "admin"} />
       </Grid>
     </Grid>
   )
