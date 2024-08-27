@@ -19,13 +19,13 @@ function EditorToolbar(props) {
 
   return (
     <GridToolbarContainer sx={{ padding: 1, display: "flex", bgcolor: "#008080", color: "white" }}>
-      <Button sx={{ display: { xs: "none", md: "initial" } }} disabled={isLoading} key="toolbar-add-evento" startIcon={<AddRounded />} color="inherit" onClick={AddRow}>
+      <Button sx={{ display: { xs: "none", md: "inherit" } }} disabled={isLoading} key="toolbar-add-evento" startIcon={<AddRounded />} color="inherit" onClick={AddRow}>
         Añadir evento
       </Button>
-      <Button sx={{ display: { xs: "none", md: "initial" } }} disabled={!hasUnsavedRows} key="toolbar-guardar-datos" startIcon={<SaveRounded />} color="inherit" onClick={() => console.log("hola")}>
+      <Button sx={{ display: { xs: "none", md: "inherit" } }} disabled={!hasUnsavedRows} key="toolbar-guardar-datos" startIcon={<SaveRounded />} color="inherit" onClick={() => console.log("hola")}>
         Guardar datos
       </Button>
-      <Button sx={{ display: { xs: "none", md: "initial" } }} disabled={!hasUnsavedRows} key="toolbar-descartar-todo" startIcon={<RestoreRounded />} color="inherit" onClick={discardChanges}>
+      <Button sx={{ display: { xs: "none", md: "inherit" } }} disabled={!hasUnsavedRows} key="toolbar-descartar-todo" startIcon={<RestoreRounded />} color="inherit" onClick={discardChanges}>
         Descartar todo
       </Button>
       <Button sx={{ display: { md: "none" } }} disabled={isLoading} key="toolbar-add-evento" startIcon={<AddRounded />} color="inherit" onClick={AddRow} />
