@@ -128,7 +128,10 @@ export default function EditorEventos() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "calc((100vh - 84px - 4rem))",
+        height: {
+          xs: "calc((100vh - 84px - 8rem))",
+          md: "calc((100vh - 84px - 4rem))"
+        }
       }}
     >
       <Table
