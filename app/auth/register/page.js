@@ -4,7 +4,7 @@ import { Alert, Avatar, Button, Paper, Snackbar, Stack, TextField, Typography } 
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterUserSchema } from "@/schemas";
-import { registerUser } from "@/actions/register";
+import { registerUser } from "@/actions/auth/register";
 import { useState, useTransition } from "react";
 import { Check, Close, PersonRounded } from "@mui/icons-material";
 import dayjs from "dayjs";

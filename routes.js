@@ -18,7 +18,10 @@ export const authRoutes = [
 
 // Rutas de entrenador: accesibles por aquellos usuarios con sesión iniciada que tengan el rol de entrenador o admin en la base de datos
 export const trainerRoutes = [
-  "/auth/register"
+  "/auth/register",
+  "/admin/panel",
+  "/admin/editor/eventos",
+  "/admin/editor/marcas"
 ]
 
 // Rutas de administrador: accesibles por aquellos usuarios con sesión iniciada que tengan el rol de admin en la base de datos

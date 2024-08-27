@@ -3,6 +3,10 @@
 */
 import * as z from "zod"
 
+/*
+  Auth Schemas
+*/
+
 // Esquema de inicio de sesión de un atleta
 export const LoginUserSchema = z.object({
   dni: z.string({ message: "" }).min(1, { message: "" })
@@ -27,4 +31,13 @@ export const RegisterAdminSchema = z.object({
   dni: z.string({ message: "" }).min(1, { message: "" }),
   nacimiento: z.coerce.date({ message: "" }),
   password: z.string({ message: "" }).min(6, { message: "" })
+})
+
+/*
+  Data Schemas
+*/
+export const AddEventoSchema = z.object({
+  nombre: z.string({ message: "" }).min(1, { message: "" }),
+  fecha: z.coerce.date({ message: "" }),
+  lugar: z.string({ message: "" }).min(1, { message: "" })
 })

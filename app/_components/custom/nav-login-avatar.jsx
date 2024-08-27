@@ -1,6 +1,6 @@
 "use client";
 
-import { logout } from "@/actions/logout";
+import { logout } from "@/actions/auth/logout";
 import { DEFAULT_LOGOUT_REDIRECT } from "@/routes";
 import { Logout } from "@mui/icons-material";
 import { Avatar, Backdrop, Button, Card, CardActions, CardContent, ListItemIcon, ListItemText, Menu, MenuItem, styled, Typography } from "@mui/material";

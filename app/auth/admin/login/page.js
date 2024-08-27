@@ -4,7 +4,7 @@ import { Alert, Avatar, Button, Paper, Snackbar, Stack, TextField, Typography } 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginAdminSchema } from "@/schemas";
-import { login } from "@/actions/login-admin";
+import { login } from "@/actions/auth/login-admin";
 import { useState, useTransition } from "react";
 import { Check, Close, ShieldRounded } from "@mui/icons-material";
 
