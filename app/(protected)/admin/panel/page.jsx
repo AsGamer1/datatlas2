@@ -1,7 +1,7 @@
 "use client";
 
 import { Grid } from "@mui/material";
-import Table from "@/app/_components/custom/admin-tables";
+import Table from "@/app/_components/custom/admin/tables";
 import { useEffect, useState } from "react";
 import { getFuturosEventos } from "@/actions/data/get/get-eventos";
 import { getMarcasRegistradas } from "@/actions/data/get/get-marcas";
