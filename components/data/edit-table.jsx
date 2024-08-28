@@ -56,7 +56,7 @@ function NoRows() {
   )
 }
 
-export function EditableDataGrid({ columns, data, setData, onSave }) {
+export function EditableDataGrid({ columns, data, onSave }) {
   const apiRef = useGridApiRef();
   const [hasUnsavedRows, setHasUnsavedRows] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -64,10 +64,12 @@ export function EditableDataGrid({ columns, data, setData, onSave }) {
   const unsavedChangesRef = useRef({
     unsavedRows: {},
     rowsBeforeChange: {},
+    newRows: {}
   });
 
   const processRowUpdate = useCallback((newRow, oldRow) => {
     const rowId = newRow.id;
+    if (unsavedChangesRef.current.newRows[rowId]) return newRow
     unsavedChangesRef.current.unsavedRows[rowId] = newRow;
     if (!unsavedChangesRef.current.rowsBeforeChange[rowId]) {
       unsavedChangesRef.current.rowsBeforeChange[rowId] = oldRow;
@@ -81,17 +83,20 @@ export function EditableDataGrid({ columns, data, setData, onSave }) {
     Object.values(unsavedChangesRef.current.rowsBeforeChange).forEach((row) => {
       apiRef.current.updateRows([row]);
     });
+    Object.keys(unsavedChangesRef.current.newRows).forEach((id) => {
+      apiRef.current.updateRows([{ id, _action: 'delete' }]);
+    });
     unsavedChangesRef.current = {
       unsavedRows: {},
       rowsBeforeChange: {},
+      newRows: {}
     };
   }, [apiRef]);
 
   const addRow = () => {
-    setData((oldRows) => [
-      ...oldRows,
-      { id: oldRows.length + 1 },
-    ]);
+    const newRowId = apiRef.current.getRowsCount() + 1;
+    apiRef.current.updateRows([{ id: newRowId }]);
+    unsavedChangesRef.current.newRows[newRowId] = { id: newRowId };
   };
 
   const gridActionColumn = {
@@ -104,9 +109,15 @@ export function EditableDataGrid({ columns, data, setData, onSave }) {
         label="Deshacer cambios"
         disabled={unsavedChangesRef.current.unsavedRows[id] === undefined}
         onClick={() => {
-          apiRef.current.updateRows([unsavedChangesRef.current.rowsBeforeChange[id]])
-          delete unsavedChangesRef.current.rowsBeforeChange[id]
-          delete unsavedChangesRef.current.unsavedRows[id]
+          if (unsavedChangesRef.current.newRows[id]) {
+            apiRef.current.updateRows([unsavedChangesRef.current.newRows[id]]);
+            delete unsavedChangesRef.current.rowsBeforeChange[id]
+            delete unsavedChangesRef.current.unsavedRows[id]
+          } else {
+            apiRef.current.updateRows([unsavedChangesRef.current.rowsBeforeChange[id]])
+            delete unsavedChangesRef.current.rowsBeforeChange[id]
+            delete unsavedChangesRef.current.unsavedRows[id]
+          }
           setHasUnsavedRows(Object.keys(unsavedChangesRef.current.unsavedRows).length > 0)
         }}
       />,
@@ -115,12 +126,17 @@ export function EditableDataGrid({ columns, data, setData, onSave }) {
         icon={<DeleteRounded />}
         label="Borrar fila"
         onClick={() => {
-          unsavedChangesRef.current.unsavedRows[id] = { ...row, _action: "delete", };
-          if (!unsavedChangesRef.current.rowsBeforeChange[id]) {
-            unsavedChangesRef.current.rowsBeforeChange[id] = row;
+          if (unsavedChangesRef.current.newRows[id]) {
+            delete unsavedChangesRef.current.newRows[id];
+            apiRef.current.updateRows([{ id: id, _action: "delete" }]);
+          } else {
+            unsavedChangesRef.current.unsavedRows[id] = { ...row, _action: "delete", };
+            if (!unsavedChangesRef.current.rowsBeforeChange[id]) {
+              unsavedChangesRef.current.rowsBeforeChange[id] = row;
+            }
+            setHasUnsavedRows(true);
+            apiRef.current.updateRows([row]);
           }
-          setHasUnsavedRows(true);
-          apiRef.current.updateRows([row]);
         }}
       />
     ]
@@ -135,6 +151,9 @@ export function EditableDataGrid({ columns, data, setData, onSave }) {
         return "row--removed";
       }
       return "row--edited";
+    } else {
+      const newRow = unsavedChangesRef.current.newRows[id];
+      if (newRow) return "row--added"
     }
     return "";
   }, []);
@@ -170,7 +189,6 @@ export function EditableDataGrid({ columns, data, setData, onSave }) {
         slotProps={{
           toolbar: {
             addRow,
-            setData,
             isLoading,
             discardChanges,
             hasUnsavedRows,
@@ -190,6 +208,9 @@ export function EditableDataGrid({ columns, data, setData, onSave }) {
           },
           [`& .${gridClasses.row}.row--edited`]: {
             backgroundColor: '#ff9800'
+          },
+          [`& .${gridClasses.row}.row--added`]: {
+            backgroundColor: '#4caf50'
           },
           "& .MuiDataGrid-columnHeader--sortable": {
             cursor: "default"
