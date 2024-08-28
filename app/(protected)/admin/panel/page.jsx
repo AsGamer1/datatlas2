@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 export default function AdminPanel() {
 
   const session = useSession();
+  const isAdmin = session?.data?.user.image === "admin";
 
   const [eventosFuturos, setEventosFuturos] = useState(undefined)
   const [marcasRegistradas, setMarcasRegistradas] = useState(undefined)
@@ -44,7 +45,7 @@ export default function AdminPanel() {
         <Table key="atletas-registrados-table" title="Atletas registrados" fetch={atletasRegistrados} action="/auth/register" />
       </Grid>
       <Grid item key="entrenadores-registrados-grid-item" xs={12} md={6}>
-        <Table key="entrenadores-registrados" title="Entrenadores registrados" fetch={entrenadoresRegistrados} action="/auth/admin/register" disabled={session?.data?.user.image !== "admin"} />
+        <Table key="entrenadores-registrados" title="Entrenadores registrados" fetch={entrenadoresRegistrados} action={isAdmin && "/auth/admin/register"} disabled={isAdmin} />
       </Grid>
     </Grid>
   )
