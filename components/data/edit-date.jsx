@@ -15,7 +15,7 @@ export function CustomEditDate({ id, value, field }) {
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
       <DateField
         fullWidth
-        value={value === undefined ? value : dayjs(value)}
+        value={dayjs(value)}
         onChange={(newValue) => handleValueChange(newValue)}
         sx={{
           "& .MuiInputBase-root": {

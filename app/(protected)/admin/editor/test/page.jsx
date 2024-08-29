@@ -29,9 +29,9 @@ export default function EditorEventos() {
     fetchData();
   }, []);
 
-  const handleSave = (updatedRows, unsavedChanges) => {
+  const handleSave = (unsavedRows, newRows) => {
     // Aquí implementarías la lógica para guardar los cambios
-    console.log("Guardar cambios:", unsavedChanges);
+    console.log("Guardar cambios:", unsavedRows, newRows);
   };
 
   return (

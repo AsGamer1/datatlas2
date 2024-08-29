@@ -2,7 +2,7 @@
 
 import { AddRounded, DeleteRounded, RestoreRounded, SaveRounded } from "@mui/icons-material";
 import { Button, Paper, Stack, Typography } from "@mui/material";
-import { DataGrid, gridClasses, GridToolbarContainer, GridActionsCellItem, useGridApiRef } from "@mui/x-data-grid";
+import { DataGrid, gridClasses, GridToolbarContainer, GridActionsCellItem, useGridApiRef, GridCellModes } from "@mui/x-data-grid";
 import { useCallback, useRef, useState } from "react";
 
 function EditorToolbar({ addRow, isLoading, discardChanges, hasUnsavedRows, onSave }) {
@@ -60,6 +60,7 @@ export function EditableDataGrid({ columns, data, onSave }) {
   const apiRef = useGridApiRef();
   const [hasUnsavedRows, setHasUnsavedRows] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [cellModesModel, setCellModesModel] = useState({});
 
   const unsavedChangesRef = useRef({
     unsavedRows: {},
@@ -69,13 +70,17 @@ export function EditableDataGrid({ columns, data, onSave }) {
 
   const processRowUpdate = useCallback((newRow, oldRow) => {
     const rowId = newRow.id;
-    if (unsavedChangesRef.current.newRows[rowId]) return newRow
-    unsavedChangesRef.current.unsavedRows[rowId] = newRow;
-    if (!unsavedChangesRef.current.rowsBeforeChange[rowId]) {
-      unsavedChangesRef.current.rowsBeforeChange[rowId] = oldRow;
-    }
     setHasUnsavedRows(true);
-    return newRow;
+    if (unsavedChangesRef.current.newRows[rowId]) {
+      unsavedChangesRef.current.newRows[rowId] = newRow
+      return newRow
+    } else {
+      unsavedChangesRef.current.unsavedRows[rowId] = newRow;
+      if (!unsavedChangesRef.current.rowsBeforeChange[rowId]) {
+        unsavedChangesRef.current.rowsBeforeChange[rowId] = oldRow;
+      }
+      return newRow;
+    }
   }, []);
 
   const discardChanges = useCallback(() => {
@@ -158,6 +163,45 @@ export function EditableDataGrid({ columns, data, onSave }) {
     return "";
   }, []);
 
+  const handleCellClick = useCallback((params, event) => {
+    if (!params.isEditable) {
+      return;
+    }
+
+    if (event.target.nodeType === 1 && !event.currentTarget.contains(event.target)) {
+      return;
+    }
+
+    setCellModesModel((prevModel) => {
+      return {
+        ...Object.keys(prevModel).reduce(
+          (acc, id) => ({
+            ...acc,
+            [id]: Object.keys(prevModel[id]).reduce(
+              (acc2, field) => ({
+                ...acc2,
+                [field]: { mode: GridCellModes.View },
+              }),
+              {},
+            ),
+          }),
+          {},
+        ),
+        [params.id]: {
+          ...Object.keys(prevModel[params.id] || {}).reduce(
+            (acc, field) => ({ ...acc, [field]: { mode: GridCellModes.View } }),
+            {},
+          ),
+          [params.field]: { mode: GridCellModes.Edit },
+        },
+      };
+    });
+  }, []);
+
+  const handleCellModesModelChange = useCallback((newModel) => {
+    setCellModesModel(newModel);
+  }, []);
+
   return (
     <Paper
       elevation={5}
@@ -180,6 +224,9 @@ export function EditableDataGrid({ columns, data, onSave }) {
         apiRef={apiRef}
         processRowUpdate={processRowUpdate}
         getRowClassName={getRowClassName}
+        cellModesModel={cellModesModel}
+        onCellModesModelChange={handleCellModesModelChange}
+        onCellClick={handleCellClick}
         hideFooter
         disableColumnFilter
         disableColumnSorting
@@ -192,7 +239,7 @@ export function EditableDataGrid({ columns, data, onSave }) {
             isLoading,
             discardChanges,
             hasUnsavedRows,
-            onSave: () => onSave(data, unsavedChangesRef.current.unsavedRows)
+            onSave: () => onSave(unsavedChangesRef.current.unsavedRows, unsavedChangesRef.current.newRows)
           }
         }}
         sx={{
