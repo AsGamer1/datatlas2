@@ -45,7 +45,7 @@ export default function AdminPanel() {
         <Table key="atletas-registrados-table" title="Atletas registrados" fetch={atletasRegistrados} action="/auth/register" />
       </Grid>
       <Grid item key="entrenadores-registrados-grid-item" xs={12} md={6}>
-        <Table key="entrenadores-registrados" title="Entrenadores registrados" fetch={entrenadoresRegistrados} action={isAdmin && "/auth/admin/register"} disabled={isAdmin} />
+        <Table key="entrenadores-registrados" title="Entrenadores registrados" fetch={entrenadoresRegistrados} action={isAdmin && "/auth/admin/register"} disabled={!isAdmin} />
       </Grid>
     </Grid>
   )
