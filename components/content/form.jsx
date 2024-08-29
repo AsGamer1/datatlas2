@@ -63,6 +63,8 @@ export default function Form({ fields, schema, defaultValues, action, AvatarIcon
                   render={({ field: controllerField }) => (
                     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
                       <DateField
+                        fullWidth
+                        enableAccessibleFieldDOMStructure
                         label={field.label}
                         inputRef={controllerField.ref}
                         value={controllerField.value}

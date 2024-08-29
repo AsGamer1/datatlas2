@@ -15,6 +15,7 @@ export function CustomEditDate({ id, value, field }) {
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
       <DateField
         fullWidth
+        enableAccessibleFieldDOMStructure
         value={dayjs(value)}
         onChange={(newValue) => handleValueChange(newValue)}
         sx={{
