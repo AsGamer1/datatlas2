@@ -3,7 +3,7 @@
 import { LoginUserSchema } from "@/schemas";
 import { login } from "@/actions/auth/login";
 import { PersonRounded } from "@mui/icons-material";
-import Form from "@/components/content/form";
+import Form from "@/components/forms/form";
 
 export default function LoginForm() {
   return (

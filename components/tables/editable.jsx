@@ -217,7 +217,6 @@ export function EditableDataGrid({ columns, data, onSave }) {
       }}
     >
       <DataGrid
-        slots={{ toolbar: EditorToolbar, noRowsOverlay: NoRows }}
         columns={tableColumns}
         rows={data}
         autoHeight={isLoading}
@@ -233,6 +232,7 @@ export function EditableDataGrid({ columns, data, onSave }) {
         disableColumnMenu
         disableColumnResize
         disableRowSelectionOnClick
+        slots={{ toolbar: EditorToolbar, noRowsOverlay: NoRows }}
         slotProps={{
           toolbar: {
             addRow,

@@ -3,7 +3,7 @@
 import { LoginAdminSchema } from "@/schemas";
 import { login } from "@/actions/auth/login-admin";
 import { ShieldRounded } from "@mui/icons-material";
-import Form from "@/components/content/form";
+import Form from "@/components/forms/form";
 
 export default function LoginAdminForm() {
   return (

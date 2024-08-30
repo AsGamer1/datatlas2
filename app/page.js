@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import { Box } from "@mui/material";
 import { WorkspacePremiumRounded, HistoryRounded, EmojiEventsRounded } from "@mui/icons-material";
-import { HomeCard } from "@/components/content/home-card";
+import { HomeCard } from "@/components/ui/home-card";
 import ThreeColorTitle from "@/components/font/three-color-title";
 
 function LoggedOutHome() {

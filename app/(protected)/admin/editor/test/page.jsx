@@ -1,7 +1,7 @@
 "use client";
 
-import { CustomEditDate } from "@/components/data/edit-date";
-import { EditableDataGrid } from "@/components/data/edit-table";
+import { CustomEditDate } from "@/components/forms/edit-date";
+import { EditableDataGrid } from "@/components/tables/editable";
 import { getEditableEventos } from "@/actions/data/get/get-eventos";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";

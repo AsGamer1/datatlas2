@@ -3,7 +3,7 @@
 import { RegisterUserSchema } from "@/schemas";
 import { registerUser } from "@/actions/auth/register";
 import { PersonRounded } from "@mui/icons-material";
-import Form from "@/components/content/form";
+import Form from "@/components/forms/form";
 
 export default function RegisterForm() {
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { Grid } from "@mui/material";
-import Table from "@/app/_components/custom/admin/tables";
+import PanelTable from "@/components/tables/panel";
 import { useEffect, useState } from "react";
 import { getFuturosEventos } from "@/actions/data/get/get-eventos";
 import { getMarcasRegistradas } from "@/actions/data/get/get-marcas";
@@ -36,16 +36,16 @@ export default function AdminPanel() {
   return (
     <Grid container spacing={2} sx={{ paddingX: 2, marginY: 2 }}>
       <Grid item key="proximos-eventos-grid-item" xs={12} md={6}>
-        <Table key="proximos-eventos-table" title="Próximos eventos" fetch={eventosFuturos} action="/admin/editor/eventos" />
+        <PanelTable key="proximos-eventos-table" title="Próximos eventos" fetch={eventosFuturos} action="/admin/editor/eventos" />
       </Grid>
       <Grid item key="marcas-registradas-grid-item" xs={12} md={6}>
-        <Table key="marcas-registradas-table" title="Marcas registradas" fetch={marcasRegistradas} action="/admin/editor/marcas" />
+        <PanelTable key="marcas-registradas-table" title="Marcas registradas" fetch={marcasRegistradas} action="/admin/editor/marcas" />
       </Grid>
       <Grid item key="atletas-registrados-grid-item" xs={12} md={6}>
-        <Table key="atletas-registrados-table" title="Atletas registrados" fetch={atletasRegistrados} action="/auth/register" />
+        <PanelTable key="atletas-registrados-table" title="Atletas registrados" fetch={atletasRegistrados} action="/auth/register" />
       </Grid>
       <Grid item key="entrenadores-registrados-grid-item" xs={12} md={6}>
-        <Table key="entrenadores-registrados" title="Entrenadores registrados" fetch={entrenadoresRegistrados} action={isAdmin && "/auth/admin/register"} disabled={!isAdmin} />
+        <PanelTable key="entrenadores-registrados" title="Entrenadores registrados" fetch={entrenadoresRegistrados} action={isAdmin && "/auth/admin/register"} disabled={!isAdmin} />
       </Grid>
     </Grid>
   )

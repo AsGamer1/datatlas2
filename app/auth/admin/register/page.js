@@ -3,7 +3,7 @@
 import { RegisterAdminSchema } from "@/schemas";
 import { registerAdmin } from "@/actions/auth/register-admin";
 import { ShieldRounded } from "@mui/icons-material";
-import Form from "@/components/content/form";
+import Form from "@/components/forms/form";
 
 export default function RegisterAdminForm() {
   return (
