@@ -1,9 +1,7 @@
 "use client";
 
-import { CustomEditDate } from "@/components/forms/edit-date";
 import { EditableDataGrid } from "@/components/tables/editable";
-import { getEditableEventos } from "@/actions/data/get/get-eventos";
-import dayjs from "dayjs";
+import { getEditableMarcas } from "@/actions/data/get/get-marcas";
 import { useEffect, useState } from "react";
 
 export default function EditorEventos() {
@@ -12,18 +10,8 @@ export default function EditorEventos() {
 
   useEffect(() => {
     async function fetchData() {
-      const fetch = await getEditableEventos();
-      const formattedColumns = fetch.columns.map((column) => {
-        if (column.field === "Fecha") {
-          return {
-            ...column,
-            valueFormatter: (params) => params ? dayjs(params).format("DD/MM/YYYY") : params,
-            renderEditCell: (params) => <CustomEditDate {...params} />,
-          };
-        }
-        return column;
-      });
-      setColumns(formattedColumns);
+      const fetch = await getEditableMarcas();
+      setColumns(fetch.columns);
       setData(fetch.data);
     }
     fetchData();

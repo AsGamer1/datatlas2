@@ -1,9 +1,11 @@
 "use client";
 
 import { AddRounded, DeleteRounded, RestoreRounded, SaveRounded } from "@mui/icons-material";
-import { Button, Paper, Stack, Typography } from "@mui/material";
-import { DataGrid, gridClasses, GridToolbarContainer, GridActionsCellItem, useGridApiRef, GridCellModes } from "@mui/x-data-grid";
+import { Button, Paper, Typography } from "@mui/material";
+import { gridClasses, GridToolbarContainer, GridActionsCellItem, useGridApiRef, GridCellModes } from "@mui/x-data-grid";
 import { useCallback, useRef, useState } from "react";
+import Table from "@/components/tables/table";
+import DummyTable from "./dummy";
 
 function EditorToolbar({ addRow, isLoading, discardChanges, hasUnsavedRows, onSave }) {
   return (
@@ -45,14 +47,6 @@ function EditorToolbar({ addRow, isLoading, discardChanges, hasUnsavedRows, onSa
         </Typography>
       </Button>
     </GridToolbarContainer>
-  )
-}
-
-function NoRows() {
-  return (
-    <Stack sx={{ alignItems: "center", justifyContent: "center", height: "100%" }}>
-      <Typography variant="body2">No hay datos</Typography>
-    </Stack>
   )
 }
 
@@ -216,70 +210,37 @@ export function EditableDataGrid({ columns, data, onSave }) {
         }
       }}
     >
-      <DataGrid
-        columns={tableColumns}
-        rows={data}
-        autoHeight={isLoading}
-        apiRef={apiRef}
-        processRowUpdate={processRowUpdate}
-        getRowClassName={getRowClassName}
-        cellModesModel={cellModesModel}
-        onCellModesModelChange={handleCellModesModelChange}
-        onCellClick={handleCellClick}
-        hideFooter
-        disableColumnFilter
-        disableColumnSorting
-        disableColumnMenu
-        disableColumnResize
-        disableRowSelectionOnClick
-        slots={{ toolbar: EditorToolbar, noRowsOverlay: NoRows }}
-        slotProps={{
-          toolbar: {
-            addRow,
-            isLoading,
-            discardChanges,
-            hasUnsavedRows,
-            onSave: () => onSave(unsavedChangesRef.current.unsavedRows, unsavedChangesRef.current.newRows)
-          }
-        }}
-        sx={{
-          width: "100%",
-          [`& .${gridClasses.cell}:focus, & .${gridClasses.cell}:focus-within`]: {
-            outline: 'none',
-          },
-          [`& .${gridClasses.columnHeader}:focus, & .${gridClasses.columnHeader}:focus-within`]: {
-            outline: 'none',
-          },
-          [`& .${gridClasses.row}.row--removed`]: {
-            backgroundColor: '#ef5350'
-          },
-          [`& .${gridClasses.row}.row--edited`]: {
-            backgroundColor: '#ff9800'
-          },
-          [`& .${gridClasses.row}.row--added`]: {
-            backgroundColor: '#4caf50'
-          },
-          "& .MuiDataGrid-columnHeader--sortable": {
-            cursor: "default"
-          },
-          "& .MuiDataGrid-columnHeaderTitle": {
-            cursor: "text",
-            whiteSpace: "normal !important",
-            wordWrap: "normal !important",
-            textAlign: "center",
-            color: "white "
-          },
-          "& .MuiDataGrid-columnSeparator": {
-            display: "none"
-          },
-          "& .MuiDataGrid-scrollbar": {
-            scrollbarWidth: "thin"
-          },
-          "& .MuiDataGrid-columnHeader": {
-            backgroundColor: "transparent"
-          }
-        }}
-      />
+      {data ?
+        <Table
+          props={{
+            apiRef: apiRef,
+            processRowUpdate: processRowUpdate,
+            getRowClassName: getRowClassName,
+            cellModesModel: cellModesModel,
+            onCellModesModelChange: handleCellModesModelChange,
+            onCellClick: handleCellClick,
+            disableRowSelectionOnClick: true
+          }}
+          columns={tableColumns}
+          rows={data}
+          isLoading={isLoading}
+          Toolbar={EditorToolbar}
+          toolbarProps={{ addRow, isLoading, discardChanges, hasUnsavedRows, OnSave: () => onSave(unsavedChangesRef.current.unsavedRows, unsavedChangesRef.current.newRows) }}
+          sx={{
+            [`& .${gridClasses.row}.row--removed`]: {
+              backgroundColor: '#ef5350'
+            },
+            [`& .${gridClasses.row}.row--edited`]: {
+              backgroundColor: '#ff9800'
+            },
+            [`& .${gridClasses.row}.row--added`]: {
+              backgroundColor: '#4caf50'
+            }
+          }}
+        />
+        :
+        <DummyTable cols={3} toolbarHeight={{ xs: 32, md: 36 }} />
+      }
     </Paper>
   )
 }

@@ -1,10 +1,10 @@
 import { Box, Stack, Typography } from "@mui/material"
 import { DataGrid, gridClasses, GridToolbarContainer } from "@mui/x-data-grid"
 
-function Toolbar() {
+function Toolbar({ toolbarHeight }) {
   return (
     <GridToolbarContainer sx={{ padding: 1, display: "flex", justifyContent: "center", bgcolor: "#008080", color: "white" }}>
-      <Box sx={{ height: 32 }} />
+      <Box sx={{ height: toolbarHeight }} />
     </GridToolbarContainer>
   )
 }
@@ -17,7 +17,7 @@ function NoRows() {
   )
 }
 
-export default function DummyTable({ cols }) {
+export default function DummyTable({ toolbarHeight, cols }) {
 
   const initialColumns = Array(cols).fill().map((_, index) => ({ ...{ id: index, field: "", flex: 1, headerAlign: 'center', align: 'center' } }))
 
@@ -40,7 +40,8 @@ export default function DummyTable({ cols }) {
         loadingOverlay: {
           variant: "skeleton",
           noRowsVariant: "skeleton",
-        }
+        },
+        toolbar: { toolbarHeight: toolbarHeight || 32 }
       }}
       sx={{
         width: "100%",

@@ -34,9 +34,7 @@ export default function Table({ isLoading, columns, rows, Toolbar, title, sx, pr
         noRowsOverlay: {
           title: title || "datos"
         },
-        toolbar: {
-          ...toolbarProps
-        }
+        toolbar: toolbarProps
       }}
       sx={{
         ...sx,
