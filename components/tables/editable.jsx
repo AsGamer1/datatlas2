@@ -96,6 +96,8 @@ export function EditableDataGrid({ columns, data, onSave }) {
     const newRowId = apiRef.current.getRowsCount() + 1;
     apiRef.current.updateRows([{ id: newRowId }]);
     unsavedChangesRef.current.newRows[newRowId] = { id: newRowId };
+    setHasUnsavedRows(true);
+
   };
 
   const gridActionColumn = {
@@ -117,7 +119,7 @@ export function EditableDataGrid({ columns, data, onSave }) {
             delete unsavedChangesRef.current.rowsBeforeChange[id]
             delete unsavedChangesRef.current.unsavedRows[id]
           }
-          setHasUnsavedRows(Object.keys(unsavedChangesRef.current.unsavedRows).length > 0)
+          setHasUnsavedRows(Object.keys(unsavedChangesRef.current.unsavedRows).length + Object.keys(unsavedChangesRef.current.newRows).length > 0);
         }}
       />,
       <GridActionsCellItem
@@ -128,6 +130,7 @@ export function EditableDataGrid({ columns, data, onSave }) {
           if (unsavedChangesRef.current.newRows[id]) {
             delete unsavedChangesRef.current.newRows[id];
             apiRef.current.updateRows([{ id: id, _action: "delete" }]);
+            setHasUnsavedRows(Object.keys(unsavedChangesRef.current.unsavedRows).length + Object.keys(unsavedChangesRef.current.newRows).length > 0);
           } else {
             unsavedChangesRef.current.unsavedRows[id] = { ...row, _action: "delete", };
             if (!unsavedChangesRef.current.rowsBeforeChange[id]) {
