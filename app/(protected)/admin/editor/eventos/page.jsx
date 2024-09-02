@@ -30,15 +30,15 @@ export default function EditorEventos() {
   }, []);
 
   const handleSave = (unsavedRows, newRows) => {
-    // Aquí implementarías la lógica para guardar los cambios
-    console.log("Guardar cambios:", unsavedRows, newRows);
+    console.log("Guardar cambios:", unsavedRows)
+    console.log("Nuevas filas:", newRows)
   };
 
   return (
     <EditableDataGrid
       columns={columns}
       data={data}
-      onSave={handleSave}
+      saveAction={handleSave}
     />
   );
 }

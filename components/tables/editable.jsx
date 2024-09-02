@@ -7,7 +7,7 @@ import { useCallback, useRef, useState } from "react";
 import Table from "@/components/tables/table";
 import DummyTable from "./dummy";
 
-function EditorToolbar({ addRow, isLoading, discardChanges, hasUnsavedRows, onSave }) {
+function EditorToolbar({ addRow, isLoading, discardChanges, hasUnsavedRows, saveChanges }) {
   return (
     <GridToolbarContainer sx={{ padding: 1, display: "flex", bgcolor: "#008080", color: "white" }}>
       <Button
@@ -26,7 +26,7 @@ function EditorToolbar({ addRow, isLoading, discardChanges, hasUnsavedRows, onSa
         disabled={!hasUnsavedRows}
         startIcon={<SaveRounded />}
         color="inherit"
-        onClick={onSave}
+        onClick={saveChanges}
       >
         <Typography
           sx={{ display: { xs: "none", md: "inherit" } }}
@@ -50,7 +50,7 @@ function EditorToolbar({ addRow, isLoading, discardChanges, hasUnsavedRows, onSa
   )
 }
 
-export function EditableDataGrid({ columns, data, onSave }) {
+export function EditableDataGrid({ columns, data, saveAction }) {
   const apiRef = useGridApiRef();
   const [hasUnsavedRows, setHasUnsavedRows] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -77,6 +77,12 @@ export function EditableDataGrid({ columns, data, onSave }) {
     }
   }, []);
 
+  const saveChanges = useCallback(() => {
+    let unsavedRows = unsavedChangesRef.current.unsavedRows
+    let newRows = unsavedChangesRef.current.newRows
+    saveAction(unsavedRows, newRows)
+  }, [saveAction])
+
   const discardChanges = useCallback(() => {
     setHasUnsavedRows(false);
     Object.values(unsavedChangesRef.current.rowsBeforeChange).forEach((row) => {
@@ -97,7 +103,6 @@ export function EditableDataGrid({ columns, data, onSave }) {
     apiRef.current.updateRows([{ id: newRowId }]);
     unsavedChangesRef.current.newRows[newRowId] = { id: newRowId };
     setHasUnsavedRows(true);
-
   };
 
   const gridActionColumn = {
@@ -228,7 +233,13 @@ export function EditableDataGrid({ columns, data, onSave }) {
           rows={data}
           isLoading={isLoading}
           Toolbar={EditorToolbar}
-          toolbarProps={{ addRow, isLoading, discardChanges, hasUnsavedRows, OnSave: () => onSave(unsavedChangesRef.current.unsavedRows, unsavedChangesRef.current.newRows) }}
+          toolbarProps={{
+            addRow,
+            isLoading,
+            discardChanges,
+            hasUnsavedRows,
+            saveChanges
+          }}
           sx={{
             [`& .${gridClasses.row}.row--removed`]: {
               backgroundColor: '#ef5350'

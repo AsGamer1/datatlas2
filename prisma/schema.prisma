@@ -30,32 +30,32 @@ model usuario {
 }
 
 model sector {
-  id            Int      @id @default(autoincrement())
+  id            String   @id @default(cuid())
   nombre        String
   es_individual Boolean
   pruebas       prueba[]
 }
 
 model prueba {
-  id            Int             @id @default(autoincrement())
+  id            String          @id @default(cuid())
   nombre        String
-  id_sector     Int
+  id_sector     String
   unidades      unidades_marcas
   sector        sector          @relation(fields: [id_sector], references: [id])
   competiciones competicion[]
 }
 
 model evento {
-  id            Int           @id @default(autoincrement())
+  id            String        @id @default(cuid())
   nombre        String
   fecha         DateTime
-  id_lugar      Int
+  id_lugar      String
   lugar         lugar         @relation(fields: [id_lugar], references: [id])
   competiciones competicion[]
 }
 
 model lugar {
-  id       Int      @id @default(autoincrement())
+  id       String   @id @default(cuid())
   nombre   String
   latitud  Float
   longitud Float
@@ -63,9 +63,9 @@ model lugar {
 }
 
 model competicion {
-  id              Int             @id @default(autoincrement())
-  id_evento       Int
-  id_prueba       Int
+  id              String          @id @default(cuid())
+  id_evento       String
+  id_prueba       String
   evento          evento          @relation(fields: [id_evento], references: [id])
   prueba          prueba          @relation(fields: [id_prueba], references: [id])
   participaciones participacion[]
@@ -73,7 +73,7 @@ model competicion {
 
 model participacion {
   id             String      @id @default(cuid())
-  id_competicion Int
+  id_competicion String
   marca          String
   competicion    competicion @relation(fields: [id_competicion], references: [id])
   compiten       compite[]
