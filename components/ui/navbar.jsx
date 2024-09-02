@@ -1,9 +1,21 @@
 "use client";
 
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import { AppBar, Box, Link, styled, Toolbar, useTheme } from "@mui/material";
+import { AppBar, Avatar, Box, Link, styled, Toolbar, useTheme } from "@mui/material";
 import dynamic from "next/dynamic";
-const DynamicNavLink = dynamic(() => import("@/app/_components/custom/nav-login-avatar"), { ssr: false })
+const DynamicNavLink = dynamic(() => import("@/components/ui/nav-login-avatar"), {
+  ssr: false,
+  loading: () =>
+    <Avatar sx={{
+      backgroundColor: "#7affff",
+      border: "4px solid #0BE0E0",
+      color: "#008080",
+      fontWeight: "600",
+      margin: 1,
+      cursor: "wait"
+    }}
+    />
+})
 
 export default function Navbar({ session }) {
 

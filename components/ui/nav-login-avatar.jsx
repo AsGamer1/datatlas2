@@ -28,12 +28,11 @@ export default function NavUserAvatar({ session }) {
   })
 
   // UserAvatar devuelve las iniciales del atleta, nombre y primer apellido. Si el atleta tiene dos nombres devolverá las iniciales de estos
-
-  if (session?.user) {
-    return (
+  return (
+    session ?
       <>
         <Button ref={anchorEl} onClick={() => setIsMenuOpen(true)} style={{ borderRadius: 8, minWidth: 0, padding: 8 }}>
-          <UserAvatar>{session?.user?.name.split(" ").map(function (item, index) { if (index < 2) return item[0] }).join('')}</UserAvatar>
+          <UserAvatar>{session?.name.split(" ").map(function (item, index) { if (index < 2) return item[0] }).join('')}</UserAvatar>
         </Button>
         <Menu anchorEl={anchorEl.current} open={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
           <MenuItem onClick={() => { setIsMenuOpen(false); setIsDialogOpen(true) }}>
@@ -56,10 +55,7 @@ export default function NavUserAvatar({ session }) {
           </Card>
         </Backdrop>
       </>
-    )
-  } else {
-    return (
+      :
       <NavButton variant="contained" href={DEFAULT_LOGOUT_REDIRECT}>Iniciar sesión</NavButton>
-    )
-  }
+  )
 }
