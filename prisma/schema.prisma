@@ -56,7 +56,7 @@ model evento {
 
 model lugar {
   id       String   @id @default(cuid())
-  nombre   String
+  nombre   String   @unique
   latitud  Float
   longitud Float
   eventos  evento[]

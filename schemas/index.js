@@ -37,7 +37,8 @@ export const RegisterAdminSchema = z.object({
   Data Schemas
 */
 export const AddEventoSchema = z.object({
-  nombre: z.string({ message: "" }).min(1, { message: "" }),
-  fecha: z.coerce.date({ message: "" }),
-  lugar: z.string({ message: "" }).min(1, { message: "" })
+  id: z.any({message: ""}),
+  Evento: z.string({ message: "" }).min(1, { message: "" }),
+  Fecha: z.coerce.date({ message: "" }),
+  Lugar: z.string({ message: "" }).min(1, { message: "" })
 })

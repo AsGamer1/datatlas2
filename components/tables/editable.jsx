@@ -5,7 +5,7 @@ import { Button, Paper, Typography } from "@mui/material";
 import { gridClasses, GridToolbarContainer, GridActionsCellItem, useGridApiRef, GridCellModes } from "@mui/x-data-grid";
 import { useCallback, useRef, useState } from "react";
 import Table from "@/components/tables/table";
-import DummyTable from "./dummy";
+import DummyTable from "@/components/tables/dummy";
 
 function EditorToolbar({ addRow, isLoading, discardChanges, hasUnsavedRows, saveChanges }) {
   return (
@@ -55,6 +55,7 @@ export function EditableDataGrid({ columns, data, saveAction }) {
   const [hasUnsavedRows, setHasUnsavedRows] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [cellModesModel, setCellModesModel] = useState({});
+  const [rowNum, setRowNum] = useState(0)
 
   const unsavedChangesRef = useRef({
     unsavedRows: {},
@@ -79,6 +80,7 @@ export function EditableDataGrid({ columns, data, saveAction }) {
 
   const saveChanges = useCallback(() => {
     let unsavedRows = unsavedChangesRef.current.unsavedRows
+    console.log(unsavedRows)
     let newRows = unsavedChangesRef.current.newRows
     saveAction(unsavedRows, newRows)
   }, [saveAction])
@@ -99,7 +101,8 @@ export function EditableDataGrid({ columns, data, saveAction }) {
   }, [apiRef]);
 
   const addRow = () => {
-    const newRowId = apiRef.current.getRowsCount() + 1;
+    const newRowId = Math.max(rowNum + 1, apiRef.current.getRowsCount() + 1)
+    setRowNum(newRowId)
     apiRef.current.updateRows([{ id: newRowId }]);
     unsavedChangesRef.current.newRows[newRowId] = { id: newRowId };
     setHasUnsavedRows(true);
@@ -148,7 +151,7 @@ export function EditableDataGrid({ columns, data, saveAction }) {
       />
     ]
   }
-
+// mmmmm -0queso
   const tableColumns = [gridActionColumn, ...columns];
 
   const getRowClassName = useCallback(({ id }) => {
