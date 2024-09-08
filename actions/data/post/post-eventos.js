@@ -24,7 +24,7 @@ export async function postEventos({ unsavedRows, newRows }) {
       for (const row of Object.values(unsavedRows)) {
         const validatedFields = AddEventoSchema.safeParse(row);
 
-        if (!validatedFields.success) { return { error: "Error inesperado" } }
+        if (!validatedFields.success) { return { error: "Campos inválidos" } }
 
         const { Evento, Fecha, Lugar, id } = validatedFields.data;
 
@@ -43,7 +43,7 @@ export async function postEventos({ unsavedRows, newRows }) {
       for (const row of Object.values(newRows)) {
         const validatedFields = AddEventoSchema.safeParse(row);
 
-        if (!validatedFields.success) { return { error: validatedFields.error } }
+        if (!validatedFields.success) { return { error: "Campos inválidos" } }
 
         const { Evento, Fecha, Lugar } = validatedFields.data;
 
@@ -59,6 +59,6 @@ export async function postEventos({ unsavedRows, newRows }) {
 
     return { success: "Cambios guardados con éxito" };
   } catch (error) {
-    return { error: "Ocurrió un error al procesar los eventos." };
+    return { error: "Ocurrió un error al procesar los eventos" };
   }
 }

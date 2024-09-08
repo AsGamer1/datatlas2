@@ -8,7 +8,7 @@ import { startTransition, useEffect, useState } from "react";
 import { postEventos } from "@/actions/data/post/post-eventos";
 import { Alert, Snackbar } from "@mui/material";
 import { Check, Close } from "@mui/icons-material";
-import { CustomEditAutocomplete } from "@/components/forms/edit-autocomplete";
+import { CustomEditLugar } from "@/components/forms/edit-lugar";
 import { getLugares } from "@/actions/data/get/get-lugares";
 
 export default function EditorEventos() {
@@ -31,7 +31,7 @@ export default function EditorEventos() {
         } else if (column.field === "Lugar") {
           return {
             ...column,
-            renderEditCell: (params) => <CustomEditAutocomplete {...params} label="Selecciona un lugar" options={lugares}/>
+            renderEditCell: (params) => <CustomEditLugar {...params} label="Selecciona un lugar" options={lugares}/>
           }
         }
         return column;

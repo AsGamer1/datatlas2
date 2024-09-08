@@ -15,6 +15,7 @@ export default auth((req) => {
 
   const isLoggedIn = !!req.auth
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
+  const isApiGooglePlaces = nextUrl.pathname.startsWith("/api/places")
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
   const isAuthRoute = authRoutes.includes(nextUrl.pathname)
   const isTrainerRoute = trainerRoutes.includes(nextUrl.pathname)
@@ -51,6 +52,15 @@ export default auth((req) => {
     return null
   }
 
+  if (isApiGooglePlaces) {
+    if (isLoggedIn) {
+      if (req.auth.user.image !== "entrenador" && req.auth.user.image !== "admin") {
+        return Response.json({ error: "Autenticación fallida" }, { status: 403 })
+      }
+    }
+    return null
+  }
+
   // Si es una ruta de admin, solo permite el acceso si el rol del usuario es de admin (reservado para el dev y el presi)
   if (isAdminRoute) {
     if (isLoggedIn) {
@@ -66,5 +76,5 @@ export default auth((req) => {
 
 // Matcher: se aplica el Middleware a las páginas que cumplan con las expresiones regulares dadas
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|images|icons|icon.png).*)", "/"]
+  matcher: ["/api/places", "/((?!api|_next/static|_next/image|icons|icon.png|sw.js).*)", "/"]
 }
