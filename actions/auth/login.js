@@ -14,7 +14,7 @@ import { AuthError } from "next-auth";
 import { getUser } from "@/data/user";
 
 export async function login(values) {
-  const validatedFields = LoginUserSchema.safeParse(values);
+  const validatedFields = LoginUserSchema.safeParse(values)
 
   if (!validatedFields.success) return { error: "Campos inválidos" }
 

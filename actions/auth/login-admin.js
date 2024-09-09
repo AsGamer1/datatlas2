@@ -15,7 +15,7 @@ import { getUser } from "@/data/user";
 import { redirect } from "next/navigation";
 
 export async function login(values) {
-  const validatedFields = LoginAdminSchema.safeParse(values);
+  const validatedFields = LoginAdminSchema.safeParse(values)
 
   if (!validatedFields.success) return { error: "Campos inválidos" }
 

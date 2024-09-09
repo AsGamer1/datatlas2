@@ -16,7 +16,7 @@ export async function getEntrenadoresRegistrados() {
           }
         ]
       }
-    });
+    })
 
     const data = fetch.map(entrenador => ({
       id: entrenador.id,

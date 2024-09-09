@@ -11,15 +11,14 @@ import { getUser } from "@/data/user";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { auth } from "@/auth";
-
 dayjs.extend(utc);
 
 export async function registerUser(values) {
   // Comprueba la sesión actual, si el usuario no es entrenador, no se le permite continuar con la ejecución de esta acción
-  const session = await auth();
+  const session = await auth()
   if (session?.user?.image !== "entrenador" && session?.user?.image !== "admin") return { error: "Permiso denegado" }
 
-  const validatedFields = RegisterUserSchema.safeParse(values);
+  const validatedFields = RegisterUserSchema.safeParse(values)
 
   if (!validatedFields.success) return { error: "Campos inválidos" }
 
@@ -29,7 +28,7 @@ export async function registerUser(values) {
   if (existingUser) return { error: "Ya existe este usuario" }
 
   const properNombre = nombre.toLowerCase().split(' ').map(function (word) {
-    return word.replace(word[0], word[0].toUpperCase());
+    return word.replace(word[0], word[0].toUpperCase())
   }).join(' ')
   const capitalDNI = dni.toUpperCase()
   const utcNacimiento = dayjs(nacimiento).utc(true).toDate()

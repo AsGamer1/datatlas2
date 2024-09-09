@@ -1,5 +1,5 @@
-import { Stack, Typography } from "@mui/material"
-import { DataGrid, gridClasses } from "@mui/x-data-grid"
+import { Stack, Typography } from "@mui/material";
+import { DataGrid, gridClasses } from "@mui/x-data-grid";
 
 function NoRows({ title }) {
   return (

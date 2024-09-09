@@ -17,7 +17,7 @@ export async function getEditableMarcas() {
           }
         }
       }
-    });
+    })
 
     const data = fetch.map(compite => ({
       id: compite.id_participacion & compite.id_usuario,

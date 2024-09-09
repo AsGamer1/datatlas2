@@ -1,8 +1,9 @@
 "use client";
 
-import { EditableDataGrid } from "@/components/tables/editable";
+import EditableDataGrid from "@/components/tables/editable";
 import { getEditableMarcas } from "@/actions/data/get/get-marcas";
 import { useEffect, useState } from "react";
+import { formatColumns } from "@/components/tables/columns/format-columns";
 
 export default function EditorEventos() {
   const [data, setData] = useState(undefined);
@@ -10,11 +11,12 @@ export default function EditorEventos() {
 
   useEffect(() => {
     async function fetchData() {
-      const fetch = await getEditableMarcas();
-      setColumns(fetch.columns);
-      setData(fetch.data);
+      const fetch = await getEditableMarcas()
+      const formattedColumns = await formatColumns(fetch.columns)
+      setColumns(formattedColumns)
+      setData(fetch.data)
     }
-    fetchData();
+    fetchData()
   }, []);
 
   const handleSave = (unsavedRows, newRows) => {
@@ -26,7 +28,7 @@ export default function EditorEventos() {
     <EditableDataGrid
       columns={columns}
       data={data}
-      onSave={handleSave}
+      saveAction={handleSave}
     />
   );
 }

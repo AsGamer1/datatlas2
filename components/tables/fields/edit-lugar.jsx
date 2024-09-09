@@ -4,36 +4,31 @@ import { useEffect, useState, useMemo } from "react";
 import { debounce } from "@mui/material/utils";
 import { LocationOnRounded } from "@mui/icons-material";
 
-export function CustomEditLugar({ id, field, value, label }) {
+export function CustomEditLugar({ id, field, value, label, savedOptions }) {
   const apiRef = useGridApiContext()
   const [options, setOptions] = useState([])
   const [inputValue, setInputValue] = useState(value || "")
 
   const fetchPlaces = useMemo(() => debounce(async (input) => {
-    try {
-      const response = await fetch(`/api/places?input=${encodeURIComponent(input)}`)
-      const data = await response.json()
-      if (data.predictions) {
-        setOptions(data.predictions.map((place) => ({
-          main: place.structured_formatting.main_text,
-          secondary: place.structured_formatting.secondary_text
-        })))
-      } else {
-        setOptions([])
-      }
-    } catch (error) {
-      console.error("Error fetching places:", error)
-      setOptions([])
+    const response = await fetch(`/api/places?input=${encodeURIComponent(input)}`)
+    const data = await response.json()
+    if (data.predictions && data.predictions.length > 0) {
+      setOptions(data.predictions.map((place) => ({
+        main: place.structured_formatting.main_text,
+        secondary: place.structured_formatting.secondary_text
+      })))
+    } else {
+      setOptions(savedOptions)
     }
-  }, 400), [])
+  }, 400), [savedOptions])
 
   useEffect(() => {
     if (inputValue) {
       fetchPlaces(inputValue)
     } else {
-      setOptions([])
+      setOptions(savedOptions)
     }
-  }, [inputValue, fetchPlaces])
+  }, [inputValue, fetchPlaces, savedOptions])
 
   const handleValueChange = (_, newValue) => {
     apiRef.current.setEditCellValue({ id, field, value: newValue?.main || "" })
@@ -53,8 +48,8 @@ export function CustomEditLugar({ id, field, value, label }) {
       onInputChange={(_, newInputValue) => setInputValue(newInputValue)}
       onChange={handleValueChange}
       fullWidth
-      renderOption={(props, option) => (
-        <li {...props}>
+      renderOption={({ key, ...props }, option) => (
+        <li key={key} {...props}>
           <Grid container sx={{ alignItems: "center" }}>
             <Grid item sx={{ display: "flex", width: 44 }}>
               <LocationOnRounded sx={{ color: "text.secondary" }} />
@@ -88,16 +83,3 @@ export function CustomEditLugar({ id, field, value, label }) {
     />
   )
 }
-
-/*
-
-b8tg8rftttttt5ftttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr6y6hhuidrscw+ç/97ç4+´7i
-  ///2223j3uiyucdf3ehjkk,04nhjmu3e4 bfnnnnb7yhmyh,myh,,,,,,,,,,,,,,,,mmmmmmmmmmmmmmmmmmmmmmmmmmmmm;*Ç
-9ñ´´pñp-  ´-    }}
-    />
-  _'´ñ
-}p'0`ç+.´ñh`
-
--Queso
-
-*/

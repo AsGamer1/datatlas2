@@ -9,7 +9,7 @@ export async function getAtletasRegistrados() {
       where: {
         rol: "atleta"
       }
-    });
+    })
 
     const data = fetch.map(atleta => ({
       id: atleta.id,

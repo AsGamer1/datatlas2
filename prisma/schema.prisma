@@ -55,11 +55,12 @@ model evento {
 }
 
 model lugar {
-  id       String   @id @default(cuid())
-  nombre   String   @unique
-  latitud  Float
-  longitud Float
-  eventos  evento[]
+  id          String   @id @default(cuid())
+  nombre      String   @unique
+  descripcion String
+  latitud     Float
+  longitud    Float
+  eventos     evento[]
 }
 
 model competicion {

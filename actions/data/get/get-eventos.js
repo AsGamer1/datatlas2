@@ -8,8 +8,11 @@ export async function getEditableEventos() {
     const fetch = await db.evento.findMany({
       include: {
         lugar: true
+      },
+      orderBy: {
+        fecha: "desc"
       }
-    });
+    })
 
     const data = fetch.map(evento => ({
       id: evento.id,
@@ -41,7 +44,7 @@ export async function getFuturosEventos() {
           gte: new Date()
         }
       }
-    });
+    })
 
     const data = fetch.map(evento => ({
       id: evento.id,

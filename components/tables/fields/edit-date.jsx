@@ -16,7 +16,7 @@ export function CustomEditDate({ id, value, field }) {
       <DateField
         fullWidth
         enableAccessibleFieldDOMStructure
-        value={dayjs(value)}
+        value={value ? dayjs(value) : value}
         onChange={(newValue) => handleValueChange(newValue)}
         sx={{
           "& .MuiInputBase-root": {
