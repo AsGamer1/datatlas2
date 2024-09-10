@@ -5,6 +5,7 @@ import { getEditableEventos } from "@/actions/data/get/get-eventos";
 import { postEventos } from "@/actions/data/post/post-eventos";
 import { formatColumns } from "@/components/tables/columns/format-columns";
 import { useEffect, useState } from "react";
+import { useLugares } from "@/contexts/LugaresContext";
 
 async function fetchData() {
   const fetch = await getEditableEventos()
@@ -16,6 +17,7 @@ export default function EditorEventos() {
   const [data, setData] = useState(undefined)
   const [columns, setColumns] = useState([])
   const [saved, setSaved] = useState(false)
+  const { lugares } = useLugares()
 
   useEffect(() => {
     fetchData()
@@ -30,6 +32,7 @@ export default function EditorEventos() {
       columns={columns}
       data={data}
       saveAction={postEventos}
+      saveActionProps={{ lugares: lugares }}
       saved={saved}
       setSaved={setSaved}
     />

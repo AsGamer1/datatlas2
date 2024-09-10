@@ -4,15 +4,15 @@ const apiKey = process.env.GOOGLE_MAPS_API_KEY
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url)
-  const input = searchParams.get("input")
+  const placeId = searchParams.get("placeId")
+  const sessionToken = searchParams.get("sessionToken")
 
-  if (!input) {
-    return NextResponse.json({ error: "No input provided" }, { status: 400 })
-  }
+  if (!placeId) return NextResponse.json({ error: "No place ID provided" }, { status: 400 })
+  if (!sessionToken) return NextResponse.json({ error: "No session token provided" }, { status: 400 })
 
   try {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(input)}&key=${apiKey}`
+      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(placeId)}&fields=geometry&language=es&key=${apiKey}&sessiontoken=${sessionToken}`
     )
 
     if (!response.ok) {

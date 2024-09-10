@@ -11,3 +11,12 @@ export async function getLugar(nombre) {
     return null
   }
 }
+
+export async function getLugarById(id) {
+  try {
+    const lugar = await db.lugar.findUnique({ where: { id } })
+    return lugar
+  } catch {
+    return null
+  }
+}

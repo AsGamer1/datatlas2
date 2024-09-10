@@ -24,7 +24,7 @@ const EditorToolbar = ({ addRow, discardChanges, hasUnsavedRows, saveChanges }) 
 )
 
 // Componente principal para el grid editable
-export default function EditableDataGrid({ columns, data, saveAction, saved, setSaved }) {
+export default function EditableDataGrid({ columns, data, saveAction, saveActionProps, saved, setSaved }) {
   const apiRef = useGridApiRef() // Referencia al API del DataGrid
   const [hasUnsavedRows, setHasUnsavedRows] = useState(false) // Estado para verificar si hay cambios sin guardar
   const [cellModesModel, setCellModesModel] = useState({}) // Estado que controla los modos de las celdas (edición/visualización)
@@ -62,7 +62,7 @@ export default function EditableDataGrid({ columns, data, saveAction, saved, set
     setHasUnsavedRows(false)
     Object.values(unsavedChangesRef.current.unsavedRows).forEach((row) => {
       if (row._action === "delete") apiRef.current.updateRows([{ id: row.id, _action: "delete" }])
-      })
+    })
     unsavedChangesRef.current = {
       unsavedRows: {},
       rowsBeforeChange: {},
@@ -109,14 +109,14 @@ export default function EditableDataGrid({ columns, data, saveAction, saved, set
     // Si no hay celdas inválidas, proceder con el guardado
     setInvalidCells({}) // Limpiar celdas inválidas
     startTransition(() => { // Iniciar guardado y generar respuestas de error o success
-      saveAction({ unsavedRows, newRows })
+      saveAction({ unsavedRows, newRows, ...saveActionProps })
         .then((res) => {
           setErrorResponse(res?.error)
           setSuccessResponse(res?.success)
           res?.success && processChanges(rows)
         })
     })
-  }, [saveAction, processChanges, validateRows])
+  }, [saveAction, saveActionProps, processChanges, validateRows])
 
   // Función para descartar todos los cambios
   const discardChanges = useCallback(() => {

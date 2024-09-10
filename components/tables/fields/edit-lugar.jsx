@@ -3,24 +3,31 @@ import { useGridApiContext } from "@mui/x-data-grid";
 import { useEffect, useState, useMemo } from "react";
 import { debounce } from "@mui/material/utils";
 import { LocationOnRounded } from "@mui/icons-material";
+import { v4 as uuidv4 } from "uuid";
+import { useLugares } from "@/contexts/LugaresContext";
 
-export function CustomEditLugar({ id, field, value, label, savedOptions }) {
+export function CustomEditLugar({ id, field, label, savedOptions }) {
   const apiRef = useGridApiContext()
+  const { addLugar } = useLugares()
   const [options, setOptions] = useState([])
-  const [inputValue, setInputValue] = useState(value || "")
+  const [inputValue, setInputValue] = useState("")
+  const [sessionToken, setSessionToken] = useState(null)
 
   const fetchPlaces = useMemo(() => debounce(async (input) => {
-    const response = await fetch(`/api/places?input=${encodeURIComponent(input)}`)
-    const data = await response.json()
-    if (data.predictions && data.predictions.length > 0) {
-      setOptions(data.predictions.map((place) => ({
-        main: place.structured_formatting.main_text,
-        secondary: place.structured_formatting.secondary_text
-      })))
-    } else {
-      setOptions(savedOptions)
+    if (input && sessionToken) {
+      const response = await fetch(`/api/place/autocomplete?input=${encodeURIComponent(input)}&sessionToken=${sessionToken}`)
+      const data = await response.json()
+      if (data.predictions && data.predictions.length > 0) {
+        setOptions(data.predictions.map((place) => ({
+          main: place.structured_formatting.main_text,
+          secondary: place.structured_formatting.secondary_text,
+          place_id: place.place_id
+        })))
+      } else {
+        setOptions(savedOptions)
+      }
     }
-  }, 400), [savedOptions])
+  }, 400), [savedOptions, sessionToken])
 
   useEffect(() => {
     if (inputValue) {
@@ -30,23 +37,63 @@ export function CustomEditLugar({ id, field, value, label, savedOptions }) {
     }
   }, [inputValue, fetchPlaces, savedOptions])
 
-  const handleValueChange = (_, newValue) => {
+  const handleInputChange = (_, newInputValue, reason) => {
+    if (reason === "input") {
+      if (sessionToken === null) setSessionToken(uuidv4())
+      setInputValue(newInputValue)
+    } else if (reason === "clear") {
+      // Limpiar las opciones cuando se borra el input
+      setInputValue("")
+      setOptions(savedOptions)
+    }
+  }
+
+  const handleValueChange = async (_, newValue) => {
+    if (newValue) {
+      if (newValue.place_id && sessionToken) {
+        const isSavedOption = savedOptions.some((option) => option.place_id === newValue.place_id)
+
+        if (!isSavedOption) {
+          // Si es una búsqueda desde la API de autocomplete, hacemos la llamada a details
+          const response = await fetch(`/api/place/details?placeId=${newValue?.place_id}&sessionToken=${sessionToken}`)
+          const data = await response.json()
+          if (data && data.result && data.result.geometry) {
+            const { lat, lng } = data.result.geometry.location
+            const lugar = { id: newValue.place_id, Nombre: newValue?.main, Descripcion: newValue?.secondary, Latitud: lat, Longitud: lng }
+            addLugar(lugar)
+          }
+        } else {
+          // Si selecciona un valor de savedOptions, hacemos una llamada vacía a details para evitar costes extra
+          await fetch(`/api/place/details?placeId=${newValue?.place_id}&sessionToken=${sessionToken}`)
+        }
+      }
+    }
+    setSessionToken(null)
     apiRef.current.setEditCellValue({ id, field, value: newValue?.main || "" })
     apiRef.current.stopCellEditMode({ id, field })
   }
 
+  const handleClose = async (_, reason) => {
+    // Si hay un sessionToken activo pero no se seleccionó ninguna opción, hacemos una llamada vacía a details
+    if (reason !== "selectOption" && sessionToken) {
+      await fetch(`/api/place/details?placeId=dummy&sessionToken=${sessionToken}`);
+      setSessionToken(null); // Resetear el sessionToken
+    }
+  };
+
   return (
     <Autocomplete
       id={id}
-      value={options.find(option => option.main === value) || null}
+      value={null}
       options={options}
       inputValue={inputValue}
       filterOptions={(x) => x}
       noOptionsText="No hay ubicaciones"
       getOptionLabel={(option) => option.main || ""}
       renderInput={(params) => <TextField {...params} placeholder={label} />}
-      onInputChange={(_, newInputValue) => setInputValue(newInputValue)}
+      onInputChange={handleInputChange}
       onChange={handleValueChange}
+      onClose={handleClose}
       fullWidth
       renderOption={({ key, ...props }, option) => (
         <li key={key} {...props}>
@@ -65,6 +112,7 @@ export function CustomEditLugar({ id, field, value, label, savedOptions }) {
           </Grid>
         </li>
       )}
+      componentsProps={{ popper: { sx: { minWidth: "fit-content" } } }}
       sx={{
         "& .MuiInputBase-root": {
           fontSize: "0.875rem",

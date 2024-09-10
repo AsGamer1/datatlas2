@@ -8,9 +8,12 @@ export async function getLugares() {
 
     const data = fetch.map((lugar) => ({
       main: lugar.nombre,
-      secondary: lugar.descripcion
+      secondary: lugar.descripcion,
+      place_id: lugar.id,
+      lat: lugar.latitud,
+      lng: lugar.longitud
     }))
-    
+
     return data
   } catch (error) {
     return null

@@ -15,7 +15,7 @@ export default auth((req) => {
 
   const isLoggedIn = !!req.auth
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
-  const isApiGooglePlaces = nextUrl.pathname.startsWith("/api/places")
+  const isApiGooglePlaces = nextUrl.pathname.startsWith("/api/place")
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
   const isAuthRoute = authRoutes.includes(nextUrl.pathname)
   const isTrainerRoute = trainerRoutes.includes(nextUrl.pathname)
@@ -76,5 +76,5 @@ export default auth((req) => {
 
 // Matcher: se aplica el Middleware a las páginas que cumplan con las expresiones regulares dadas
 export const config = {
-  matcher: ["/api/places", "/((?!api|_next/static|_next/image|icons|icon.png|sw.js).*)", "/"]
+  matcher: ["/api/place", "/((?!api|_next/static|_next/image|icons|icon.png|sw.js).*)", "/"]
 }
