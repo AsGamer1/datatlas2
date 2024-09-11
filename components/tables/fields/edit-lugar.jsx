@@ -31,7 +31,16 @@ export function CustomEditLugar({ id, field, label, savedOptions }) {
 
   useEffect(() => {
     if (inputValue) {
-      fetchPlaces(inputValue)
+      // Filtrar lugares guardados antes de llamar a la API
+      const filteredOptions = savedOptions.filter((option) =>
+        option.main.toLowerCase().includes(inputValue.toLowerCase())
+      )
+      if (filteredOptions.length > 0) {
+        setOptions(filteredOptions); // Mostrar los lugares filtrados
+      } else {
+        if (sessionToken === null) setSessionToken(uuidv4())
+        fetchPlaces(inputValue)
+      }
     } else {
       setOptions(savedOptions)
     }
@@ -39,7 +48,6 @@ export function CustomEditLugar({ id, field, label, savedOptions }) {
 
   const handleInputChange = (_, newInputValue, reason) => {
     if (reason === "input") {
-      if (sessionToken === null) setSessionToken(uuidv4())
       setInputValue(newInputValue)
     } else if (reason === "clear") {
       // Limpiar las opciones cuando se borra el input
