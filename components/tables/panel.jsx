@@ -10,7 +10,7 @@ function Toolbar({ title, actions, disabled }) {
       <Typography variant="h6">{title}</Typography>
       <Box sx={{ position: "absolute", right: 0, margin: 0.6 }}>
         {actions.map(action => (
-          <IconButton href={action?.href} disabled={action?.disabled} color="info" size="small" >
+          <IconButton key={action?.key} href={action?.href} disabled={action?.disabled} color="info" size="small" >
             <action.Icon fontSize={action?.iconFontSize || "medium"} />
           </IconButton>
         ))}

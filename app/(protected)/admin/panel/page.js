@@ -35,7 +35,7 @@ export default function AdminPanel() {
           key="proximos-eventos-table"
           title="Próximos eventos"
           fetch={datos?.eventos}
-          actions={[{ href: "/admin/editor/eventos", Icon: EditRounded, iconFontSize: "small" }]}
+          actions={[{ key: "editar-eventos", href: "/admin/editor/eventos", Icon: EditRounded, iconFontSize: "small" }]}
         />
       </Grid>
       <Grid item key="marcas-registradas-grid-item" xs={12} md={6}>
@@ -43,7 +43,7 @@ export default function AdminPanel() {
           key="marcas-registradas-table"
           title="Marcas registradas"
           fetch={datos?.marcas}
-          actions={[{ href: "/admin/editor/marcas", Icon: EditRounded, iconFontSize: "small" }]}
+          actions={[{ key: "editar-marcas", href: "/admin/editor/marcas", Icon: EditRounded, iconFontSize: "small" }]}
         />
       </Grid>
       <Grid item key="atletas-registrados-grid-item" xs={12} md={6}>
@@ -51,7 +51,7 @@ export default function AdminPanel() {
           key="atletas-registrados-table"
           title="Atletas registrados"
           fetch={datos?.atletas}
-          actions={[{ href: "/auth/register", Icon: AddRounded }, { href: "/admin/editor/atletas", Icon: EditRounded, iconFontSize: "small" }]}
+          actions={[{ key: "añadir-atleta", href: "/auth/register", Icon: AddRounded }, { key: "editar-atletas", href: "/admin/editor/atletas", Icon: EditRounded, iconFontSize: "small" }]}
         />
       </Grid>
       <Grid item key="entrenadores-registrados-grid-item" xs={12} md={6}>
@@ -59,7 +59,7 @@ export default function AdminPanel() {
           key="entrenadores-registrados"
           title="Entrenadores registrados"
           fetch={datos?.entrenadores}
-          actions={[{ href: isAdmin && "/auth/admin/register", Icon: AddRounded, disabled: !isAdmin }, { href: isAdmin && "/admin/editor/entrenadores", Icon: EditRounded, iconFontSize: "small", disabled: !isAdmin }]}
+          actions={[{ key: "añadir-entrenador", href: isAdmin && "/auth/admin/register", Icon: AddRounded, disabled: !isAdmin }, { key: "editar-entrenadores", href: isAdmin && "/admin/editor/entrenadores", Icon: EditRounded, iconFontSize: "small", disabled: !isAdmin }]}
         />
       </Grid>
     </Grid>
