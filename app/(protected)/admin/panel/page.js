@@ -8,6 +8,7 @@ import { getMarcasRegistradas } from "@/actions/data/get/get-marcas";
 import { getAtletasRegistrados } from "@/actions/data/get/get-atletas";
 import { getEntrenadoresRegistrados } from "@/actions/data/get/get-entrenadores";
 import { useSession } from "next-auth/react";
+import { AddRounded, EditRounded } from "@mui/icons-material";
 
 export default function AdminPanel() {
 
@@ -34,7 +35,7 @@ export default function AdminPanel() {
           key="proximos-eventos-table"
           title="Próximos eventos"
           fetch={datos?.eventos}
-          action="/admin/editor/eventos"
+          actions={[{ href: "/admin/editor/eventos", Icon: EditRounded, iconFontSize: "small" }]}
         />
       </Grid>
       <Grid item key="marcas-registradas-grid-item" xs={12} md={6}>
@@ -42,7 +43,7 @@ export default function AdminPanel() {
           key="marcas-registradas-table"
           title="Marcas registradas"
           fetch={datos?.marcas}
-          action="/admin/editor/marcas"
+          actions={[{ href: "/admin/editor/marcas", Icon: EditRounded, iconFontSize: "small" }]}
         />
       </Grid>
       <Grid item key="atletas-registrados-grid-item" xs={12} md={6}>
@@ -50,7 +51,7 @@ export default function AdminPanel() {
           key="atletas-registrados-table"
           title="Atletas registrados"
           fetch={datos?.atletas}
-          action="/auth/register"
+          actions={[{ href: "/auth/register", Icon: AddRounded }, { href: "/admin/editor/atletas", Icon: EditRounded, iconFontSize: "small" }]}
         />
       </Grid>
       <Grid item key="entrenadores-registrados-grid-item" xs={12} md={6}>
@@ -58,8 +59,7 @@ export default function AdminPanel() {
           key="entrenadores-registrados"
           title="Entrenadores registrados"
           fetch={datos?.entrenadores}
-          action={isAdmin && "/auth/admin/register"}
-          disabled={!isAdmin}
+          actions={[{ href: isAdmin && "/auth/admin/register", Icon: AddRounded, disabled: !isAdmin }, { href: isAdmin && "/admin/editor/entrenadores", Icon: EditRounded, iconFontSize: "small", disabled: !isAdmin }]}
         />
       </Grid>
     </Grid>

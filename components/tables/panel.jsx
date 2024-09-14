@@ -1,21 +1,25 @@
 import DummyTable from "@/components/tables/dummy";
 import Table from "@/components/tables/table";
-import { AddRounded } from "@mui/icons-material";
-import { IconButton, Paper, Typography } from "@mui/material";
+import { EditRounded } from "@mui/icons-material";
+import { Box, IconButton, Paper, Typography } from "@mui/material";
 import { GridToolbarContainer } from "@mui/x-data-grid";
 
-function Toolbar({ title, action, disabled }) {
+function Toolbar({ title, actions, disabled }) {
   return (
     <GridToolbarContainer sx={{ padding: 1, display: "flex", justifyContent: "center", bgcolor: "#008080", color: "white" }}>
       <Typography variant="h6">{title}</Typography>
-      <IconButton href={action} disabled={disabled} color="info" size="small" sx={{ position: "absolute", right: 0, margin: 0.6 }}>
-        <AddRounded />
-      </IconButton>
+      <Box sx={{ position: "absolute", right: 0, margin: 0.6 }}>
+        {actions.map(action => (
+          <IconButton href={action?.href} disabled={action?.disabled} color="info" size="small" >
+            <action.Icon fontSize={action?.iconFontSize || "medium"} />
+          </IconButton>
+        ))}
+      </Box>
     </GridToolbarContainer>
   )
 }
 
-export default function PanelTable({ title, fetch, action, disabled }) {
+export default function PanelTable({ title, fetch, actions, disabled }) {
 
   const columns = fetch?.columns
   const data = fetch?.data
@@ -38,7 +42,7 @@ export default function PanelTable({ title, fetch, action, disabled }) {
           rows={data}
           Toolbar={Toolbar}
           title={title}
-          toolbarProps={{ title, action, disabled }}
+          toolbarProps={{ title, actions, disabled }}
         />
         :
         <DummyTable cols={3} />
