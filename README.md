@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="public/readme/logo_letras_horizontal.png" alt="CLUB ATLETISME ATLAS"/>
+	<img src="readme/logo_letras_horizontal.png" alt="CLUB ATLETISME ATLAS"/>
 </p>
 
 ---
@@ -15,23 +15,23 @@ Sin tener ni idea de bases de datos, casi todo fue a una misma tabla maestra.
 
 
 <p align="center">
-	<img src="public/readme/tabla_maestra.jpg" alt="Imagen de la tabla maestra"/>
+	<img src="readme/tabla_maestra.jpg" alt="Imagen de la tabla maestra"/>
 </p>
 
 Salvo por algunos campos que se convertirían en foreign keys, provenientes de otras tablas, como los nombres de los atletas o las pruebas de atletismo que hay.
 
 <p align="center">
-	<img src="public/readme/tabla_pruebas.jpg" alt="Imagen de la tabla de las pruebas de atletismo"/>
+	<img src="readme/tabla_pruebas.jpg" alt="Imagen de la tabla de las pruebas de atletismo"/>
 </p>
 
 Obviamente nada de esto estaba normalizado, incluso se pueden ver algunos campos irrelevantes para la base de datos, que utilizaba para la interfaz de usuario o para que la hoja de cálculo supiera cómo formatear los resultados introducidos o cómo ordenarlos.
 
 <p align="center">
-	<img src="public/readme/interfaz_usuario.jpg" alt="Una de las interfaces de usuario creada en la hoja de cálculo"/>
+	<img src="readme/interfaz_usuario.jpg" alt="Una de las interfaces de usuario creada en la hoja de cálculo"/>
 </p>
 
 Este resultado con el que me quedé conforme durante un tiempo fue logrado en base a muchas fórmulas y tablas dinámicas. ([Una de estas fórmulas teniendo hasta 6699 caracteres de largo](/public/readme/formula_larga.txt))
 
 <p align="center">
-	<img src="public/readme/tablas_dinamicas.jpg" alt="Tablas dinámicas"/>
+	<img src="readme/tablas_dinamicas.jpg" alt="Tablas dinámicas"/>
 </p>
