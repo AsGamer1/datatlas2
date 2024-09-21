@@ -1,6 +1,7 @@
-<p align="center">
-	<img src="readme/logo_letras_horizontal.png" alt="CLUB ATLETISME ATLAS"/>
-</p>
+<div style="text-align: justify">
+	<p align="center">
+		<img src="readme/logo_letras_horizontal.png" alt="CLUB ATLETISME ATLAS"/>
+	</p>
 
 ---
 El Club Atletisme Atlas nace fruto de una voluntad de crecimiento y expansión por parte de un pequeño grupo de apasionados del atletismo. Sergi Garcia, Valentín Gartner y Daniel Espada, técnicos de la sección de Atletismo en el CE Sant Josep Obrer, mostraron su determinación y convicción para crear algo nuevo con identidad propia y con una capacidad de expansión ilimitada.
@@ -12,7 +13,6 @@ En verano de 2022, acompañados por Ramón Manzano y Paco Blasco, e inspirados p
 Desde siempre me han encantado las hojas de cálculo (los comunmente denominados Excel). Durante el 2023 estuve registrando los resultados de los atletas del club en una de estas hojas, para generar con facilidad ránkings internos, ver quién tiene los récords del club y poder obtener un listado de los registros de cada atleta, así como el coste que ha supuesto competir en cada uno de los eventos.
 
 Sin tener ni idea de bases de datos, casi todo fue a una misma tabla maestra.
-
 
 <p align="center">
 	<img src="readme/tabla_maestra.jpg" alt="Imagen de la tabla maestra"/>
@@ -35,3 +35,4 @@ Este resultado con el que me quedé conforme durante un tiempo fue logrado en ba
 <p align="center">
 	<img src="readme/tablas_dinamicas.jpg" alt="Tablas dinámicas"/>
 </p>
+</div>
