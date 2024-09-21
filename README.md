@@ -1,4 +1,6 @@
-<img align="center" src="public/readme/logo_letras_horizontal.png" alt="CLUB ATLETISME ATLAS"/>
+<p align="center">
+	<img src="public/readme/logo_letras_horizontal.png" alt="CLUB ATLETISME ATLAS"/>
+</p>
 
 ---
 El Club Atletisme Atlas nace fruto de una voluntad de crecimiento y expansión por parte de un pequeño grupo de apasionados del atletismo. Sergi Garcia, Valentín Gartner y Daniel Espada, técnicos de la sección de Atletismo en el CE Sant Josep Obrer, mostraron su determinación y convicción para crear algo nuevo con identidad propia y con una capacidad de expansión ilimitada.
@@ -11,16 +13,25 @@ Desde siempre me han encantado las hojas de cálculo (los comunmente denominados
 
 Sin tener ni idea de bases de datos, casi todo fue a una misma tabla maestra.
 
-<img align="center" src="public/readme/tabla_maestra.jpg" alt="Imagen de la tabla maestra"/>
+
+<p align="center">
+	<img src="public/readme/tabla_maestra.jpg" alt="Imagen de la tabla maestra"/>
+</p>
 
 Salvo por algunos campos que se convertirían en foreign keys, provenientes de otras tablas, como los nombres de los atletas o las pruebas de atletismo que hay.
 
-<img align="center" src="public/readme/tabla_pruebas.jpg" alt="Imagen de la tabla de las pruebas de atletismo"/>
+<p align="center">
+	<img src="public/readme/tabla_pruebas.jpg" alt="Imagen de la tabla de las pruebas de atletismo"/>
+</p>
 
 Obviamente nada de esto estaba normalizado, incluso se pueden ver algunos campos irrelevantes para la base de datos, que utilizaba para la interfaz de usuario o para que la hoja de cálculo supiera cómo formatear los resultados introducidos o cómo ordenarlos.
 
-<img align="center" src="public/readme/interfaz_usuario.jpg" alt="Una de las interfaces de usuario creada en la hoja de cálculo"/>
+<p align="center">
+	<img src="public/readme/interfaz_usuario.jpg" alt="Una de las interfaces de usuario creada en la hoja de cálculo"/>
+</p>
 
 Este resultado con el que me quedé conforme durante un tiempo fue logrado en base a muchas fórmulas y tablas dinámicas. ([Una de estas fórmulas teniendo hasta 6699 caracteres de largo](/public/readme/formula_larga.txt))
 
-<img align="center" src="public/readme/tablas_dinamicas.jpg" alt="Tablas dinámicas"/>
+<p align="center">
+	<img src="public/readme/tablas_dinamicas.jpg" alt="Tablas dinámicas"/>
+</p>
