@@ -1,4 +1,4 @@
-<div style="text-align: justify">
+<div align="justify">
 	<p align="center">
 		<img src="readme/logo_letras_horizontal.png" alt="CLUB ATLETISME ATLAS"/>
 	</p>
