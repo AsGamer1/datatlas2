@@ -52,12 +52,28 @@ Cabe decir que también empezamos a hacer una web, en html puro, que se veía m�
 	<img src="readme/primera_web.jpg" alt="Una página en blanco con un Encabezado de nivel 1 que dice 'Datatlas'"/>
 </p>
 
-## Día 1
+## Día uno
 
 Hasta entonces yo había utilizado React Native para hacer alguna app que instalaba en mi smartphone Android con una APK. Para este proyecto también quería usar React, así que investigué hasta encontrar Next JS.
 
-Con un framework como Next JS podíamos hacer una Aplicación Web Progresiva (PWA) que se renderice en el servidor (SSR) sin que eso perjudique al posicionamiento (SEO).
+Con un framework como Next JS podíamos hacer una Aplicación Web Progresiva (PWA) que se renderice en el servidor (SSR) sin que eso perjudique al posicionamiento (SEO) ni al rendimiento. Con esto, los usuarios tienen la opción de crear un acceso directo en su dispositivo para visualizarla como si fuera una aplicación nativa.
 
-Alojando la aplicación en un servidor web, la gente la visita como lo haría con cualquier página. Además, los usuarios pueden crear un acceso directo en su dispositivo para visualizarla como si fuera una aplicación nativa.
+En un solo día creé una landing page para enseñarle el proyecto a quién la noche anterior estuvo trabajando conmigo: Valentín. Simplemente le encantó y me motivó a seguir trabajando en ello, teniendo un par de reuniones a lo largo del tiempo para mostrarle los avances y recibir un feedback por alguien tan importante en el club, y para mí.
+
+<p align="center">
+	<img src="readme/day1_landing.jpg" alt="Una página de inicio"/>
+</p>
+
+## Día quince
+
+Tras dos semanas de echarle horas a este proyecto a la vez que iba a trabajar en la empresa, tuvimos otra reunión. En esta ocasión llamamos a Antonio, un genio de la informática, para comentarle la situación en la que estábamos.
+
+> Antonio, ayuda. ¿Cómo hacemos un deploy de esta cosa?
+
+Primero valoramos hacerlo con Vercel, una plataforma de los desarrolladores de Next JS que permite publicar una aplicación web hecha en este framework, entre otros. Pero por qué hacerlo así cuando podemos configurar un servidor que ya teníamos: el que aloja la web del club.
+
+Hicimos un subdominio de la web con Cloudflare, creamos un webhook en Github que manda una solicitud POST al servidor cada vez que se hace un nuevo commit (para que un script haga pull al repositorio y luego build de la aplicación actualizada).
+
+Seis horas después y un par de arreglos que tuve que hacer en el último momento (cosas que funcionaban en development pero no en deployment), la aplicación estaba publicada, funcional y se actualizaría cada vez que hiciera algún cambio.
 
 </div>
