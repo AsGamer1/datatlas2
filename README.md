@@ -58,7 +58,7 @@ Hasta entonces yo había utilizado React Native para hacer alguna app que instal
 
 Con un framework como Next JS podíamos hacer una Aplicación Web Progresiva (PWA) que se renderice en el servidor (SSR) sin que eso perjudique al posicionamiento (SEO) ni al rendimiento. Con esto, los usuarios tienen la opción de crear un acceso directo en su dispositivo para visualizarla como si fuera una aplicación nativa.
 
-En un solo día creé una landing page para enseñarle el proyecto a quién la noche anterior estuvo trabajando conmigo: Valentín. Simplemente le encantó y me motivó a seguir trabajando en ello, teniendo un par de reuniones a lo largo del tiempo para mostrarle los avances y recibir un feedback por alguien tan importante en el club, y para mí.
+En un solo día creé una landing page para enseñarle el proyecto a quién la noche anterior estuvo trabajando conmigo: Valentín. Simplemente le encantó y me motivó a seguir trabajando en ello, teniendo un par de reuniones a lo largo del tiempo para mostrarle los avances y recibir feedback de parte de alguien tan importante para el club, y para mí.
 
 <p align="center">
 	<img src="readme/day1_landing.jpg" alt="Una página de inicio"/>
@@ -75,5 +75,7 @@ Primero valoramos hacerlo con Vercel, una plataforma de los desarrolladores de N
 Hicimos un subdominio de la web con Cloudflare, creamos un webhook en Github que manda una solicitud POST al servidor cada vez que se hace un nuevo commit (para que un script haga pull al repositorio y luego build de la aplicación actualizada).
 
 Seis horas después y un par de arreglos que tuve que hacer en el último momento (cosas que funcionaban en development pero no en deployment), la aplicación estaba publicada, funcional y se actualizaría cada vez que hiciera algún cambio.
+
+## Consecuentes
 
 </div>
